@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,15 +25,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.URI;
+import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -279,22 +278,33 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             // TODO: verify username and password
             String username = params[0];
-            String password = params[1]; // TODO: Encrypt password
-            try {
-                final String link = "https://rodneyxr.com/ep_login.php?username=" + username + "&password=" + password;
-                URL url = new URL(link);
-                HttpClient client = new DefaultHttpClient();
-                HttpGet request = new HttpGet();
-                request.setURI(new URI(link));
+            String password = params[1];
 
-                HttpResponse response = client.execute(request);
-                BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                StringBuilder sb = new StringBuilder("");
+            try {
+                // hash the password
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] sha256Result = digest.digest(password.getBytes());
+                password = Base64.encodeToString(sha256Result, Base64.URL_SAFE).substring(0, 44);
+
+                final String link = "https://rodneyxr.com/ep_login.php";
+                String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                URL url = new URL(link);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder sb = new StringBuilder();
                 String line;
-                if ((line = in.readLine()) != null)
+                // Read server response
+                while ((line = reader.readLine()) != null) {
                     sb.append(line);
-                in.close();
+                }
+                reader.close();
                 String result = sb.toString();
+                System.out.println(result);
                 return result.equals("success");
 
             } catch (Exception e) {
