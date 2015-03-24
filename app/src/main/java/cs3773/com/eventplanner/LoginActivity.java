@@ -4,22 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,29 +24,20 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends Activity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "rodneyxr:hello", "lundmc:world", "test:password"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -65,8 +48,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -100,11 +82,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void populateAutoComplete() {
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -116,68 +93,72 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUsernameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+        // Check for a valid password.
+        String message;
+        if ((message = isPasswordValid(password)) != null) {
+            mPasswordView.setError(message);
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isUsernameValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+        // Check for a valid username.
+        if ((message = isUsernameValid(username)) != null) {
+            mUsernameView.setError(message);
+            focusView = mUsernameView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            // There was an error; don't attempt login and focus the first form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            // Show a progress spinner, and kick off a background task to perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute(email, password);
+            mAuthTask = new UserLoginTask();
+            mAuthTask.execute(username, password);
         }
     }
 
     public void forgotPassword() {
-
     }
 
-    private boolean isUsernameValid(String username) {
-        return username.length() > 0;
+    private String isUsernameValid(String username) {
+        if (username.length() < 5)
+            return "This username must be at least 5 characters";
+        if (username.length() > 20)
+            return "This username must be less than 20 characters";
+        if (!username.matches("[a-zA-Z0-9_]{5,20}"))
+            return "This username is invalid";
+        return null;
     }
 
-    private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+    private String isPasswordValid(String password) {
+        if (password.length() < 5)
+            return "This password must be at least 5 characters";
+        if (password.length() > 20)
+            return "This password must be less than 20 characters";
+        return null;
     }
 
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -205,78 +186,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
-                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
-
-                // Select only email addresses.
-                ContactsContract.Contacts.Data.MIMETYPE +
-                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-                .CONTENT_ITEM_TYPE},
-
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
-                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        List<String> emails = new ArrayList<String>();
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            emails.add(cursor.getString(ProfileQuery.ADDRESS));
-            cursor.moveToNext();
-        }
-
-        addEmailsToAutoComplete(emails);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-    }
-
-    private interface ProfileQuery {
-        String[] PROJECTION = {
-                ContactsContract.CommonDataKinds.Email.ADDRESS,
-                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
-        };
-
-        int ADDRESS = 0;
-        int IS_PRIMARY = 1;
-    }
-
-
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(LoginActivity.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        mEmailView.setAdapter(adapter);
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
     public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+        UserLoginTask() {
         }
 
         @Override
         protected Boolean doInBackground(String... params) {
 
-            // TODO: verify username and password
             String username = params[0];
             String password = params[1];
 
@@ -284,8 +205,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 // hash the password
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] sha256Result = digest.digest(password.getBytes());
-                password = Base64.encodeToString(sha256Result, Base64.URL_SAFE).substring(0, 44);
+                password = Base64.encodeToString(sha256Result, Base64.URL_SAFE).substring(0, 44); // BUG
 
+                // send the request to the server
                 final String link = "https://rodneyxr.com/ep_login.php";
                 String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
                 data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
@@ -295,10 +217,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                 wr.write(data);
                 wr.flush();
+                wr.close();
+
+                // Read server response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
-                // Read server response
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
                 }
@@ -306,30 +230,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 String result = sb.toString();
                 System.out.println(result);
                 return result.equals("success");
-
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
 
-
-//            try {
-//                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-
-            // TODO: register the new account here.
-            //return true;
         }
 
         @Override
