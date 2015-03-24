@@ -29,10 +29,6 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
-        <activity
-            android:name=".CalendarActivity"
-            android:label="@string/title_activity_calendar" >
-        </activity>
     </application>
 
 </manifest>
