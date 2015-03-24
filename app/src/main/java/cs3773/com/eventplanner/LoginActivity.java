@@ -31,7 +31,7 @@ import java.security.MessageDigest;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
-    
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
