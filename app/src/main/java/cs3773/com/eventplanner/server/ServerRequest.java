@@ -18,7 +18,7 @@ import java.util.Map;
  * <p/>
  * This class will be responsible for communication with the server.
  */
-public final class ServerRequest {
+public class ServerRequest {
 
     // the link to send the request to
     private ServerLink link;
@@ -87,7 +87,6 @@ public final class ServerRequest {
         } catch (IOException ioe) {
             throw new ServerRequestException("ServerRequest.send(): IOException (error communicating with the server)");
         }
-
 
         return this;
     }
