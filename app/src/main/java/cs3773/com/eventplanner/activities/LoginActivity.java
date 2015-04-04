@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,15 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.server.ServerLink;
+import cs3773.com.eventplanner.server.ServerRequest;
+import cs3773.com.eventplanner.server.ServerRequest.ServerRequestException;
 
 
 /**
@@ -206,35 +201,22 @@ public class LoginActivity extends Activity {
 
             try {
                 // hash the password
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] sha256Result = digest.digest(password.getBytes());
-                password = Base64.encodeToString(sha256Result, Base64.URL_SAFE).substring(0, 44); // BUG
+                password = Tools.sha256Base64(password);
 
                 // send the request to the server
-                final String link = "https://rodneyxr.com/ep_login.php";
-                String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
-                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-                URL url = new URL(link);
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write(data);
-                wr.flush();
-                wr.close();
+                ServerRequest request = new ServerRequest(ServerLink.LOGIN);
+                request.put("username", username);
+                request.put("password", password);
+                request.send();
 
-                // Read server response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                reader.close();
-                String result = sb.toString();
-                System.out.println(result);
+                // get server response
+                String result = request.getResponse();
+
                 return result.equals("success");
-            } catch (Exception e) {
-                e.printStackTrace();
+                //return new ServerRequest(ServerLink.LOGIN).put("username", username).put("password", Tools.sha256Base64(password)).send().getResponse().equals("success");
+            } catch (ServerRequestException e) {
+//                e.printStackTrace();
+                System.err.println(e.getMessage());
                 return false;
             }
 
