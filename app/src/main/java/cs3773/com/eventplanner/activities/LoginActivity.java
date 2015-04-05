@@ -195,7 +195,6 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-
             String username = params[0];
             String password = params[1];
 
@@ -228,7 +227,7 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-                Intent menuIntent = new Intent(LoginActivity.this, MenuActivity.class);
+                Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(menuIntent);
                 finish();
             } else {

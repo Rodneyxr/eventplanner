@@ -1,0 +1,48 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ChatActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="469dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/toolbar_actionbar_with_headerbar" />
+        </LinearLayout>
+
+        <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal">
+
+                <EditText
+                    android:layout_width="289dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextChatMessage"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:inputType="textAutoCorrect" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="67dp"
+                    android:layout_height="wrap_content"
+                    android:text="Send"
+                    android:id="@+id/buttonSendMessage"
+                    android:layout_row="0"
+                    android:layout_column="1" />
+            </GridLayout>
+    </FrameLayout>
+
+
+    <!-- Nav drawer -->
+    <include layout="@layout/navdrawer" />
+
+</android.support.v4.widget.DrawerLayout>
