@@ -50,10 +50,15 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     // icons for navdrawer items (indices must correspond to above array)
     private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
-            R.drawable.ic_drawer_calendar,  // My Schedule
-            R.drawable.ic_drawer_event,  // Explore
-            R.drawable.ic_drawer_chat, // Map
-            R.drawable.ic_drawer_account_info, // Social
+//            R.drawable.ic_drawer_calendar,  // My Schedule
+//            R.drawable.ic_drawer_event,  // Explore
+//            R.drawable.ic_drawer_chat, // Map
+//            R.drawable.ic_drawer_account_info, // Social
+        R.drawable.ic_drawer,
+        R.drawable.ic_drawer,
+        R.drawable.ic_drawer,
+        R.drawable.ic_drawer,
+
     };
 
     // delay to launch nav drawer item, to allow close animation to play
