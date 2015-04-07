@@ -40,6 +40,7 @@ public class LoginActivity extends Activity {
     private View mProgressView;
     private View mLoginFormView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,7 +196,6 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-
 
             if (true) return true;
             String username = params[0];
