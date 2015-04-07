@@ -195,6 +195,9 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(String... params) {
+
+
+            if (true) return true;
             String username = params[0];
             String password = params[1];
 
