@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import cs3773.com.eventplanner.R;
@@ -11,30 +12,31 @@ import cs3773.com.eventplanner.R;
 
 public class AccountInfoActivity extends BaseActivity {
 
-    private String fullName = "Matthew";
-    private String phoneNumber = "124-222-3333";
-    private String email = "dummy@email.com";
-    private String accountId = "23";
+    private String fullName;
+    private String phoneNumber;
+    private String email;
+    // private String accountId; ****Not needed since account ID is system Generated.
 
-    private TextView mTextViewAccountId;
-    private TextView mTextViewFullName;
-    private TextView mTextViewPhoneNumber;
-    private TextView mTextViewEmail;
+    // private TextView mTextViewAccountId;
+    private EditText mEditTextFullName;
+    private EditText mEditTextPhoneNumber;
+    private EditText mEditTextEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
 
-        mTextViewFullName = (TextView) findViewById(R.id.textViewAccountName);
-        mTextViewEmail = (TextView) findViewById(R.id.textViewAccountEmail);
-        mTextViewPhoneNumber = (TextView) findViewById(R.id.textViewAccountNumber);
-        mTextViewAccountId = (TextView) findViewById(R.id.textViewAccountUUID);
+        mEditTextFullName = (EditText) findViewById(R.id.editTextAccountName);
+        mEditTextEmail = (EditText) findViewById(R.id.editTextAccountEmail);
+        mEditTextPhoneNumber = (EditText) findViewById(R.id.editTextAccountPhoneNumber);
+        // mTextViewAccountId = (TextView) findViewById(R.id.textViewAccountUUID);
 
         Button mUpdateAccountInfoButton = (Button) findViewById(R.id.buttonUpdateAccountInfo);
         mUpdateAccountInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getUpdatedAccountInfo();
                 updateAccountInfo();
             }
         });
@@ -47,11 +49,11 @@ public class AccountInfoActivity extends BaseActivity {
         return NAVDRAWER_ITEM_ACCOUNT_INFO;
     }
 
-    private void dummyCredentialSet() {
-        mTextViewFullName.setText(fullName);
-        mTextViewEmail.setText(email);
-        mTextViewPhoneNumber.setText(phoneNumber);
-        mTextViewAccountId.setText(accountId);
+    private void getUpdatedAccountInfo() {
+        fullName = mEditTextFullName.getText().toString();
+        email = mEditTextEmail.getText().toString();
+        phoneNumber = mEditTextPhoneNumber.getText().toString();
+        // ID doesnt need to be set because it is System generated.
     }
 
     private void updateAccountInfo() {

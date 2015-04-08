@@ -39,6 +39,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_EVENT = 1;
     protected static final int NAVDRAWER_ITEM_CHAT = 2;
     protected static final int NAVDRAWER_ITEM_ACCOUNT_INFO = 3;
+    protected static final int NAVDRAWER_ITEM_ACCOUNT_CREATE = 4;
 
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
@@ -46,6 +47,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.string.navdrawer_item_event,
             R.string.navdrawer_item_chat,
             R.string.navdrawer_item_account_info,
+            R.string.navdrawer_create_account,
     };
 
     // icons for navdrawer items (indices must correspond to above array)
@@ -54,6 +56,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.drawable.ic_drawer_event,  // Explore
             R.drawable.ic_drawer_chat, // Map
             R.drawable.ic_drawer_account_info, // Social
+            R.drawable.ic_drawer,
     };
 
     // delay to launch nav drawer item, to allow close animation to play
@@ -196,6 +199,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_CHAT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_INFO);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_CREATE);
 
         createNavDrawerItems();
     }
@@ -266,6 +270,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                 break;
             case NAVDRAWER_ITEM_ACCOUNT_INFO:
                 intent = new Intent(this, AccountInfoActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case NAVDRAWER_ITEM_ACCOUNT_CREATE:
+                intent = new Intent(this, CreateAccountActivity.class);
                 startActivity(intent);
                 finish();
                 break;

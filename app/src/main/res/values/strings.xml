@@ -7,25 +7,37 @@
     <string name="title_events">Events</string>
     <string name="title_chat">Chat</string>
     <string name="title_account_info">Account Info</string>
+
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="updateAccount">Update</string>
+    <string name="createAccount">Create</string>
+    <string name="createId">ID</string>
+
     <string name="accountPhoneNumber">Phone Number</string>
     <string name="accountEmail">Email</string>
     <string name="accountName">Full Name</string>
     <string name="accountNumber">Account Number</string>
+
     <string name="title_activity_base">BaseActivity</string>
     <string name="navdrawer_item_calendar">Calendar</string>
     <string name="navdrawer_item_event">Event</string>
     <string name="navdrawer_item_chat">Chat</string>
     <string name="navdrawer_item_account_info">Account Info</string>
+    <string name="navdrawer_create_account">Create Account</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_account_info">AccountInfoActivity</string>
+
     <string name="account_personal_info">Account Information</string>
+    <string name ="create_account">Create Account</string>
     <string name="system_generated">[System Generated]</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+
 
 </resources>
