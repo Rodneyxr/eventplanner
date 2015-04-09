@@ -1,5 +1,7 @@
 package cs3773.com.eventplanner.model;
 
+import java.util.UUID;
+
 /**
  * Created by Rodney on 3/26/2015.
  * <p/>
@@ -7,27 +9,75 @@ package cs3773.com.eventplanner.model;
  */
 public abstract class Account {
 
+    private UUID accountNumber;
     private String fullName;
+    private String username;
+    private String email;
     private String phoneNumber;
+    private String password;
 
-    public Account(String fullName) {
-        this.fullName = fullName;
+    public Account() {
+
     }
 
-    protected String getFullName() {
+    public Account(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber) {
+        setAccountNumber(accountNumber);
+        setUsername(username);
+        setPassword(password);
+        setFullName(fullName);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+    }
+
+    public UUID getAccountNumber() {
+        return accountNumber;
+    }
+
+    protected void setAccountNumber(UUID accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getFullName() {
         return fullName;
     }
 
-    protected void setFullName(String fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    protected String getPhoneNumber() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    protected void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public abstract boolean saveAccount();
+
+    public abstract boolean deleteAccount();
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequest.ServerRequestException;
@@ -196,8 +197,8 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(String... params) {
+//            if (true) return true; // temporary to avoid accessing server
 
-            if (true) return true;
             String username = params[0];
             String password = params[1];
 
@@ -214,7 +215,14 @@ public class LoginActivity extends Activity {
                 // get server response
                 String result = request.getResponse();
 
-                return result.equals("success");
+                return Session.setAccount(username, password);
+
+//                if (result.equals("success")) {
+//                    Session.setAccount(username, password);
+//                    return true;
+//                } else {
+//                    return false;
+//                }
                 //return new ServerRequest(ServerLink.LOGIN).put("username", username).put("password", Tools.sha256Base64(password)).send().getResponse().equals("success");
             } catch (ServerRequestException e) {
 //                e.printStackTrace();

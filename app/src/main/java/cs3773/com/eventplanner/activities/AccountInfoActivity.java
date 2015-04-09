@@ -8,16 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.model.Account;
+import cs3773.com.eventplanner.model.Session;
 
 
 public class AccountInfoActivity extends BaseActivity {
 
-    private String fullName;
-    private String phoneNumber;
-    private String email;
-    // private String accountId; ****Not needed since account ID is system Generated.
-
-    // private TextView mTextViewAccountId;
+    private TextView mTextViewAccountId;
     private EditText mEditTextFullName;
     private EditText mEditTextPhoneNumber;
     private EditText mEditTextEmail;
@@ -30,7 +27,7 @@ public class AccountInfoActivity extends BaseActivity {
         mEditTextFullName = (EditText) findViewById(R.id.editTextAccountName);
         mEditTextEmail = (EditText) findViewById(R.id.editTextAccountEmail);
         mEditTextPhoneNumber = (EditText) findViewById(R.id.editTextAccountPhoneNumber);
-        // mTextViewAccountId = (TextView) findViewById(R.id.textViewAccountUUID);
+        mTextViewAccountId = (TextView) findViewById(R.id.textViewAccountUUID);
 
         Button mUpdateAccountInfoButton = (Button) findViewById(R.id.buttonUpdateAccountInfo);
         mUpdateAccountInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +38,8 @@ public class AccountInfoActivity extends BaseActivity {
             }
         });
 
-
+        // refresh the view to display the user's account info
+        loadAccountInfo();
     }
 
     @Override
@@ -49,18 +47,36 @@ public class AccountInfoActivity extends BaseActivity {
         return NAVDRAWER_ITEM_ACCOUNT_INFO;
     }
 
+    /**
+     * refreshes the view with the user's account information
+     */
+    private void loadAccountInfo() {
+        Account account = Session.getAccount();
+        mEditTextFullName.setText(account.getFullName());
+        mEditTextEmail.setText(account.getEmail());
+        mEditTextPhoneNumber.setText(account.getPhoneNumber());
+        mTextViewAccountId.setText(account.getAccountNumber().toString());
+    }
+
     private void getUpdatedAccountInfo() {
-        fullName = mEditTextFullName.getText().toString();
-        email = mEditTextEmail.getText().toString();
-        phoneNumber = mEditTextPhoneNumber.getText().toString();
-        // ID doesnt need to be set because it is System generated.
+        Session.getAccount().setFullName(mEditTextFullName.getText().toString());
+        Session.getAccount().setEmail(mEditTextEmail.getText().toString());
+        Session.getAccount().setPhoneNumber(mEditTextPhoneNumber.getText().toString());
     }
 
     private void updateAccountInfo() {
-        new AlertDialog.Builder(this)
-                .setTitle("Updated Account Info")
-                .setMessage("Your account info has been updated!")
-                .setPositiveButton("Okay", null)
-                .show();
+        if (Session.getAccount().saveAccount()) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Updated Account Info")
+                    .setMessage("Your account information has been updated!")
+                    .setPositiveButton("Okay", null)
+                    .show();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage("There was a problem saving your account information!")
+                    .setPositiveButton("Okay", null)
+                    .show();
+        }
     }
 }

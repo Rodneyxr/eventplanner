@@ -7,7 +7,9 @@ package cs3773.com.eventplanner.server;
  */
 public enum ServerLink {
 
-    LOGIN("https://rodneyxr.com/ep_login.php");
+    LOGIN("https://rodneyxr.com/ep_login.php"),
+    GET_ACCOUNT("https://rodneyxr.com/ep_get_account.php"),
+    CREATE_ACCOUNT("https://rodneyxr.com/ep_create_account.php");
 
     String url;
 
