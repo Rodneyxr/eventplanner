@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.model.Role;
 
 public class CreateAccountActivity extends ActionBarActivity {
 
@@ -20,16 +24,32 @@ public class CreateAccountActivity extends ActionBarActivity {
     private String username;
     private String password;
     private String id;
+    private String spinnerSelection;
+    private Spinner s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        String[] list = new String[] {"User", "Admin"};
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
         mEditTextId = (EditText) findViewById(R.id.editTextId);
+        s = (Spinner) findViewById(R.id.spinner);
 
+        s.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list));
+
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
+                s.setSelection(pos);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }});
         Button mCreateAccountButton = (Button) findViewById(R.id.buttonCreateAccountInfo);
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,12 +58,14 @@ public class CreateAccountActivity extends ActionBarActivity {
                 createAccount();
             }
         });
+
     }
 
     public void getNewAccountInfo(){
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
         id = mEditTextId.getText().toString();
+        spinnerSelection = s.getSelectedItem().toString();
     }
     public void createAccount() {
         new AlertDialog.Builder(this)
