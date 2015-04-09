@@ -202,27 +202,6 @@ public class LoginActivity extends Activity {
             password = Tools.sha256Base64(password);
             return Session.setAccount(username, password);
 
-//            try {
-//                // hash the password
-//                password = Tools.sha256Base64(password);
-//
-//                // send the request to the server
-//                ServerRequest request = new ServerRequest(ServerLink.LOGIN);
-//                request.put("username", username);
-//                request.put("password", password);
-//                request.send();
-//
-//                // get server response
-//                String result = request.getResponse();
-//
-//
-//                //return new ServerRequest(ServerLink.LOGIN).put("username", username).put("password", Tools.sha256Base64(password)).send().getResponse().equals("success");
-//            } catch (ServerRequestException e) {
-////                e.printStackTrace();
-//                System.err.println(e.getMessage());
-//                return false;
-//            }
-
         }
 
         @Override

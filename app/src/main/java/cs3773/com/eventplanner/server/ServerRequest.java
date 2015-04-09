@@ -71,7 +71,7 @@ public class ServerRequest {
             URL url = new URL(link.url);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); // FIXME: keeps crashing here after second access
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(sb.toString());
 
             wr.flush();

@@ -1,6 +1,7 @@
 package cs3773.com.eventplanner.activities;
 
 import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class CreateAccountActivity extends BaseActivity {
     private String username;
     private String password;
     private String id;
+
+    private CreateAccountTask mCreateAccountTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,42 +57,72 @@ public class CreateAccountActivity extends BaseActivity {
 
     public void createAccount() {
         getNewAccountInfo();
-//        ServerRequest request = new ServerRequest(ServerLink.GET_ACCOUNT);
-//        request.put("username", "testusername");//username);
-//        request.put("password", "password");//Tools.sha256Base64(password));
-//        request.put("account_id", "testuuid");//UUID.randomUUID().toString());
-//        request.put("phone_number", "2101231234");
-//        request.put("email", "testemailcom");
-//        request.put("full_name", "fake name");
+        if (mCreateAccountTask != null) return;
+        mCreateAccountTask = new CreateAccountTask();
+        mCreateAccountTask.execute(username, password);
+    }
 
-        if (true) return; // below code causes crash
-        ServerRequest request = new ServerRequest(ServerLink.GET_ACCOUNT);
-        request.put("username", username);
-        request.put("password", Tools.sha256Base64(password));
-//        request.send();
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class CreateAccountTask extends AsyncTask<String, Void, Boolean> {
 
-        //String result = request.getResponse();
-
-        try {
-            request.send();
-        } catch (ServerRequestException sre) {
-            System.err.println(sre.getMessage());
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(sre.getMessage())
-                    .setPositiveButton("Okay", null)
-                    .show();
-            return;
+        CreateAccountTask() {
+            getNewAccountInfo();
         }
 
-        String result = request.getResponse();
-        System.out.println("** result: " + result);
+        @Override
+        protected Boolean doInBackground(String... params) {
+            ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
+            request.put("username", username);
+            request.put("password", Tools.sha256Base64(password));
+            request.put("account_id", UUID.randomUUID().toString());
+            request.put("phone_number", "");
+            request.put("email", "");
+            request.put("full_name", "");
 
-        new AlertDialog.Builder(this)
-                .setTitle("Created Account")
-                .setMessage("Your account has been created!")
-                .setPositiveButton("Okay", null)
-                .show();
+            try {
+                request.send();
+            } catch (ServerRequestException sre) {
+                System.err.println(sre.getMessage());
+                return false;
+            }
+
+            String result = request.getResponse();
+            System.out.println("** result: " + result);
+            // TODO: check if the account was actually created instead of just returning true
+
+            if (result.contains("Duplicate entry") && result.contains("for key 'username'")) {
+                return false;
+            }
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mCreateAccountTask = null;
+
+            if (success) {
+                new AlertDialog.Builder(CreateAccountActivity.this)
+                        .setTitle("Created Account")
+                        .setMessage("Your account has been created!")
+                        .setPositiveButton("Okay", null)
+                        .show();
+            } else {
+                new AlertDialog.Builder(CreateAccountActivity.this)
+                        .setTitle("Error")
+                        .setMessage("Unable to create account.")
+                        .setPositiveButton("Okay", null)
+                        .show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mCreateAccountTask = null;
+        }
     }
 
 }
