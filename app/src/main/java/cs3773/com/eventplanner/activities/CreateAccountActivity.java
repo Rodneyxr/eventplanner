@@ -20,7 +20,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 
     private EditText mEditTextUsername;
     private EditText mEditTextPassword;
-    private EditText mEditTextId;
+    //private EditText mEditTextId;
     private String username;
     private String password;
     private String id;
@@ -35,7 +35,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        mEditTextId = (EditText) findViewById(R.id.editTextId);
+        //mEditTextId = (EditText) findViewById(R.id.editTextId);
         s = (Spinner) findViewById(R.id.spinner);
 
         s.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list));
@@ -64,7 +64,7 @@ public class CreateAccountActivity extends ActionBarActivity {
     public void getNewAccountInfo(){
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
-        id = mEditTextId.getText().toString();
+        //id = mEditTextId.getText().toString();
         spinnerSelection = s.getSelectedItem().toString();
     }
     public void createAccount() {
