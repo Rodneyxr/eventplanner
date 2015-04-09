@@ -38,6 +38,7 @@
     <string name ="create_account">Create Account</string>
     <string name="system_generated">[System Generated]</string>
     <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="title_role">Select Role</string>
 
 
 </resources>
