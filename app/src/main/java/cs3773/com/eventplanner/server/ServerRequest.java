@@ -71,7 +71,7 @@ public class ServerRequest {
             URL url = new URL(link.url);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); // FIXME: keeps crashing here after second access
             wr.write(sb.toString());
 
             wr.flush();
@@ -119,10 +119,5 @@ public class ServerRequest {
         map.clear();
     }
 
-    public class ServerRequestException extends Exception {
-        public ServerRequestException(String message) {
-            super(message);
-        }
-    }
 
 }

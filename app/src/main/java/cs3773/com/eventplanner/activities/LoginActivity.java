@@ -20,9 +20,6 @@ import android.widget.TextView;
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
 import cs3773.com.eventplanner.model.Session;
-import cs3773.com.eventplanner.server.ServerLink;
-import cs3773.com.eventplanner.server.ServerRequest;
-import cs3773.com.eventplanner.server.ServerRequest.ServerRequestException;
 
 
 /**
@@ -202,33 +199,29 @@ public class LoginActivity extends Activity {
             String username = params[0];
             String password = params[1];
 
-            try {
-                // hash the password
-                password = Tools.sha256Base64(password);
+            password = Tools.sha256Base64(password);
+            return Session.setAccount(username, password);
 
-                // send the request to the server
-                ServerRequest request = new ServerRequest(ServerLink.LOGIN);
-                request.put("username", username);
-                request.put("password", password);
-                request.send();
-
-                // get server response
-                String result = request.getResponse();
-
-                return Session.setAccount(username, password);
-
-//                if (result.equals("success")) {
-//                    Session.setAccount(username, password);
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-                //return new ServerRequest(ServerLink.LOGIN).put("username", username).put("password", Tools.sha256Base64(password)).send().getResponse().equals("success");
-            } catch (ServerRequestException e) {
-//                e.printStackTrace();
-                System.err.println(e.getMessage());
-                return false;
-            }
+//            try {
+//                // hash the password
+//                password = Tools.sha256Base64(password);
+//
+//                // send the request to the server
+//                ServerRequest request = new ServerRequest(ServerLink.LOGIN);
+//                request.put("username", username);
+//                request.put("password", password);
+//                request.send();
+//
+//                // get server response
+//                String result = request.getResponse();
+//
+//
+//                //return new ServerRequest(ServerLink.LOGIN).put("username", username).put("password", Tools.sha256Base64(password)).send().getResponse().equals("success");
+//            } catch (ServerRequestException e) {
+////                e.printStackTrace();
+//                System.err.println(e.getMessage());
+//                return false;
+//            }
 
         }
 

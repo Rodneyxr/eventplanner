@@ -10,7 +10,6 @@ import java.util.UUID;
 public class EmployeeAccount extends Account {
 
     public EmployeeAccount() {
-
     }
 
     public EmployeeAccount(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber) {

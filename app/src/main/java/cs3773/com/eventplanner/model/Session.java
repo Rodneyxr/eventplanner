@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
-import cs3773.com.eventplanner.server.ServerRequest.ServerRequestException;
+import cs3773.com.eventplanner.server.ServerRequestException;
 
 /**
  * Created by Rodney on 4/8/2015.
@@ -41,7 +41,7 @@ public class Session {
             EmployeeAccount employeeAccount = new EmployeeAccount();
             employeeAccount.setUsername(page.getString("username"));
             employeeAccount.setPassword(page.getString("password"));
-            employeeAccount.setAccountNumber(UUID.fromString(page.getString("employee_id")));
+            employeeAccount.setAccountNumber(UUID.fromString(page.getString("account_id")));
             employeeAccount.setPhoneNumber(page.getString("phone_number"));
             employeeAccount.setEmail(page.getString("email"));
             employeeAccount.setFullName(page.getString("full_name"));
