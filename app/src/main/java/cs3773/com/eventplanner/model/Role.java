@@ -1,10 +1,22 @@
 package cs3773.com.eventplanner.model;
 
 /**
- * Created by Matthew on 4/9/2015.
+ * Created by Matthew on 4/9/2015.\
+ * .
  */
 public enum Role {
-    ADMIN,
-    USER,
-    MANAGER
-}
+    admin("admin"),
+    user("user"),
+    manager("manager");
+
+    public String name;
+
+    Role(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return name;
+    }
+
+    }

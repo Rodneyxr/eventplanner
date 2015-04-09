@@ -9,22 +9,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.UUID;
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.model.Role;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
-import cs3773.com.eventplanner.model.Role;
 
 public class CreateAccountActivity extends BaseActivity {
 
     private EditText mEditTextUsername;
     private EditText mEditTextPassword;
-    //private EditText mEditTextId;
     private String username;
     private String password;
     private String id;
@@ -37,16 +35,15 @@ public class CreateAccountActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        String[] list = new String[] {"User", "Admin"};
+        //String[] list = new String[]{"User", "Admin"};
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        //mEditTextId = (EditText) findViewById(R.id.editTextId);
         s = (Spinner) findViewById(R.id.spinner);
 
-        s.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list));
+        s.setAdapter(new ArrayAdapter<Role>(this, android.R.layout.simple_spinner_item, Role.values()));
 
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
                 s.setSelection(pos);
@@ -55,7 +52,8 @@ public class CreateAccountActivity extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
 
-            }});
+            }
+        });
         Button mCreateAccountButton = (Button) findViewById(R.id.buttonCreateAccountInfo);
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +73,6 @@ public class CreateAccountActivity extends BaseActivity {
     public void getNewAccountInfo() {
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
-        //id = mEditTextId.getText().toString();
         spinnerSelection = s.getSelectedItem().toString();
     }
 
@@ -105,7 +102,7 @@ public class CreateAccountActivity extends BaseActivity {
             request.put("phone_number", "");
             request.put("email", "");
             request.put("full_name", "");
-            request.put("role", ""); // TODO: get role from view
+            request.put("role", spinnerSelection);
 
             try {
                 request.send();

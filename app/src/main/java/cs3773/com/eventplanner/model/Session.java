@@ -45,6 +45,7 @@ public class Session {
             employeeAccount.setPhoneNumber(page.getString("phone_number"));
             employeeAccount.setEmail(page.getString("email"));
             employeeAccount.setFullName(page.getString("full_name"));
+            employeeAccount.setRole(Role.valueOf(page.getString("role")));
 
             // set the account active
             account = employeeAccount;

@@ -15,18 +15,20 @@ public abstract class Account {
     private String email;
     private String phoneNumber;
     private String password;
+    private Role role;
 
     public Account() {
 
     }
 
-    public Account(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber) {
+    public Account(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber, Role role) {
         setAccountNumber(accountNumber);
         setUsername(username);
         setPassword(password);
         setFullName(fullName);
         setEmail(email);
         setPhoneNumber(phoneNumber);
+        setRole(role);
     }
 
     public UUID getAccountNumber() {
@@ -75,6 +77,14 @@ public abstract class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public abstract boolean saveAccount();
