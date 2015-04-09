@@ -6,8 +6,11 @@ package cs3773.com.eventplanner.model;
  */
 public enum Role {
     admin("admin"),
-    user("user"),
-    manager("manager");
+    event_manager("event_manager"),
+    event_manager_assistant("event_manager_assistant"),
+    team_supervisor("team_supervisor"),
+    team_member("team_member"),
+    employee("employee");
 
     public String name;
 
@@ -19,4 +22,4 @@ public enum Role {
         return name;
     }
 
-    }
+}

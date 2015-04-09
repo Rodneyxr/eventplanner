@@ -67,14 +67,6 @@ public class LoginActivity extends Activity {
             }
         });
 
-        Button mForgotPasswordButton = (Button) findViewById(R.id.email_forgot_password);
-        mForgotPasswordButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                forgotPassword();
-            }
-        });
-
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -124,9 +116,6 @@ public class LoginActivity extends Activity {
             mAuthTask = new UserLoginTask();
             mAuthTask.execute(username, password);
         }
-    }
-
-    public void forgotPassword() {
     }
 
     private String isUsernameValid(String username) {
