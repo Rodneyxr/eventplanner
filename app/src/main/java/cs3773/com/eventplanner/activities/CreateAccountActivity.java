@@ -22,7 +22,6 @@ public class CreateAccountActivity extends BaseActivity {
     private EditText mEditTextId;
     private String username;
     private String password;
-    private String id;
 
     private CreateAccountTask mCreateAccountTask;
 
@@ -33,7 +32,6 @@ public class CreateAccountActivity extends BaseActivity {
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        mEditTextId = (EditText) findViewById(R.id.editTextId);
 
         Button mCreateAccountButton = (Button) findViewById(R.id.buttonCreateAccountInfo);
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +50,6 @@ public class CreateAccountActivity extends BaseActivity {
     public void getNewAccountInfo() {
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
-        id = mEditTextId.getText().toString();
     }
 
     public void createAccount() {
@@ -81,6 +78,7 @@ public class CreateAccountActivity extends BaseActivity {
             request.put("phone_number", "");
             request.put("email", "");
             request.put("full_name", "");
+            request.put("role", ""); // TODO: get role from view
 
             try {
                 request.send();
