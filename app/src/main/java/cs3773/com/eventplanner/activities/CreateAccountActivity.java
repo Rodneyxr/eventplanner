@@ -1,6 +1,5 @@
 package cs3773.com.eventplanner.activities;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -21,13 +20,15 @@ import cs3773.com.eventplanner.server.ServerRequestException;
 
 public class CreateAccountActivity extends BaseActivity {
 
+    // components
     private EditText mEditTextUsername;
     private EditText mEditTextPassword;
+    private Spinner mSpinnerRole;
+
+    // data
     private String username;
     private String password;
-    private String id;
     private String spinnerSelection;
-    private Spinner s;
 
     private CreateAccountTask mCreateAccountTask;
 
@@ -35,18 +36,17 @@ public class CreateAccountActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        //String[] list = new String[]{"User", "Admin"};
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        s = (Spinner) findViewById(R.id.spinner);
+        mSpinnerRole = (Spinner) findViewById(R.id.spinner);
 
-        s.setAdapter(new ArrayAdapter<Role>(this, android.R.layout.simple_spinner_item, Role.values()));
+        mSpinnerRole.setAdapter(new ArrayAdapter<Role>(this, android.R.layout.simple_spinner_item, Role.values()));
 
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpinnerRole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
-                s.setSelection(pos);
+                mSpinnerRole.setSelection(pos);
             }
 
             @Override
@@ -73,28 +73,57 @@ public class CreateAccountActivity extends BaseActivity {
     public void getNewAccountInfo() {
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
-        spinnerSelection = s.getSelectedItem().toString();
+        spinnerSelection = mSpinnerRole.getSelectedItem().toString();
     }
 
     public void createAccount() {
-        getNewAccountInfo();
         if (mCreateAccountTask != null) return;
+        getNewAccountInfo();
+
+        // validate username
+        if (username.length() < 5) {
+            errorDialog("Username must be at least 5 characters long.");
+            mEditTextUsername.requestFocus();
+            return;
+        }
+
+        // validate password
+        if (password.length() < 8) {
+            errorDialog("Password must be at least 8 character long.");
+            mEditTextPassword.requestFocus();
+            return;
+        } else if (!password.matches(".*[a-zA-z].*") || !password.matches(".*[0-9].*")) {
+            errorDialog("Password must contain at least 1 character and at least 1 number.");
+            mEditTextPassword.requestFocus();
+            return;
+        }
+
+        // TODO: check if the confirmation password equals the original
+//        if (password != confirmationPassword) {
+//            errorDialog("Passwords do not match.");
+//            mEditTextPassword.setText("");
+//            mEditTextConfirmationPassword.setText("");
+//            mEditTextPassword.requestFocus();
+//            return;
+//        }
+
         mCreateAccountTask = new CreateAccountTask();
         mCreateAccountTask.execute(username, password);
     }
+
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class CreateAccountTask extends AsyncTask<String, Void, Boolean> {
+    public class CreateAccountTask extends AsyncTask<String, Void, String> {
 
         CreateAccountTask() {
             getNewAccountInfo();
         }
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
             request.put("username", username);
             request.put("password", Tools.sha256Base64(password));
@@ -108,36 +137,32 @@ public class CreateAccountActivity extends BaseActivity {
                 request.send();
             } catch (ServerRequestException sre) {
                 System.err.println(sre.getMessage());
-                return false;
+                return sre.getMessage();
             }
 
             String result = request.getResponse();
             System.out.println("** result: " + result);
-            // TODO: check if the account was actually created instead of just returning true
 
-            if (result.contains("Duplicate entry") && result.contains("for key 'username'")) {
-                return false;
-            }
-
-            return true;
+            return result;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final String result) {
             mCreateAccountTask = null;
 
-            if (success) {
-                new AlertDialog.Builder(CreateAccountActivity.this)
-                        .setTitle("Created Account")
-                        .setMessage("Your account has been created!")
-                        .setPositiveButton("Okay", null)
-                        .show();
+            if (result.equals("")) {
+                showDialog("Created Account", "Your account has been created!");
+                mEditTextUsername.setText("");
+                mEditTextPassword.setText("");
+                mSpinnerRole.setSelection(0, true);
+                mEditTextUsername.requestFocus();
+            } else if (result.contains("Duplicate entry") && result.contains("for key 'username'")) {
+                errorDialog("That username already exists.");
+                mEditTextUsername.requestFocus();
+                mEditTextUsername.selectAll();
+
             } else {
-                new AlertDialog.Builder(CreateAccountActivity.this)
-                        .setTitle("Error")
-                        .setMessage("Unable to create account.")
-                        .setPositiveButton("Okay", null)
-                        .show();
+                errorDialog("Unable to create account.");
             }
         }
 

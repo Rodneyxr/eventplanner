@@ -40,7 +40,6 @@ public class Session {
             JSONObject page = new JSONObject(result);
             EmployeeAccount employeeAccount = new EmployeeAccount();
             employeeAccount.setUsername(page.getString("username"));
-            employeeAccount.setPassword(page.getString("password"));
             employeeAccount.setAccountNumber(UUID.fromString(page.getString("account_id")));
             employeeAccount.setPhoneNumber(page.getString("phone_number"));
             employeeAccount.setEmail(page.getString("email"));

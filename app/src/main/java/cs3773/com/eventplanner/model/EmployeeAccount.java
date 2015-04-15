@@ -12,8 +12,8 @@ public class EmployeeAccount extends Account {
     public EmployeeAccount() {
     }
 
-    public EmployeeAccount(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber, Role role) {
-        super(accountNumber, username, password, fullName, email, phoneNumber, role);
+    public EmployeeAccount(UUID accountNumber, String username, String fullName, String email, String phoneNumber, Role role) {
+        super(accountNumber, username, fullName, email, phoneNumber, role);
     }
 
     @Override

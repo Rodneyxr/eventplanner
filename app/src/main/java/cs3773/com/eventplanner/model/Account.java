@@ -14,17 +14,15 @@ public abstract class Account {
     private String username;
     private String email;
     private String phoneNumber;
-    private String password;
     private Role role;
 
     public Account() {
 
     }
 
-    public Account(UUID accountNumber, String username, String password, String fullName, String email, String phoneNumber, Role role) {
+    public Account(UUID accountNumber, String username, String fullName, String email, String phoneNumber, Role role) {
         setAccountNumber(accountNumber);
         setUsername(username);
-        setPassword(password);
         setFullName(fullName);
         setEmail(email);
         setPhoneNumber(phoneNumber);
@@ -69,14 +67,6 @@ public abstract class Account {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Role getRole() {

@@ -1,5 +1,6 @@
 package cs3773.com.eventplanner.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -312,6 +313,18 @@ public abstract class BaseActivity extends ActionBarActivity {
 //        }
 
         mDrawerLayout.closeDrawer(Gravity.START);
+    }
+
+    public void showDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Okay", null)
+                .show();
+    }
+
+    public void errorDialog(String message) {
+        showDialog("Error", message);
     }
 
     /**
