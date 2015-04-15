@@ -1,6 +1,5 @@
 package cs3773.com.eventplanner.activities;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.controller.BackgroundTask;
 import cs3773.com.eventplanner.model.Account;
 import cs3773.com.eventplanner.model.Session;
 
@@ -65,18 +65,27 @@ public class AccountInfoActivity extends BaseActivity {
     }
 
     private void updateAccountInfo() {
-        if (Session.getAccount().saveAccount()) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Updated Account Info")
-                    .setMessage("Your account information has been updated!")
-                    .setPositiveButton("Okay", null)
-                    .show();
-        } else {
-            new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage("There was a problem saving your account information!")
-                    .setPositiveButton("Okay", null)
-                    .show();
-        }
+        BackgroundTask bg = new BackgroundTask() {
+            @Override
+            protected Boolean doInBackground(String... params) {
+                return Session.getAccount().saveAccount();
+            }
+
+            @Override
+            protected void onPostExecute(final Boolean success) {
+                if (success) {
+                    showDialog("Updated Account Info", "Your account information has been updated!");
+                } else {
+                    errorDialog("There was a problem saving your account information!");
+                }
+            }
+        };
+        bg.execute();
+
+//        if (Session.getAccount().saveAccount()) {
+//            showDialog("Updated Account Info", "Your account information has been updated!");
+//        } else {
+//            errorDialog("There was a problem saving your account information!");
+//        }
     }
 }

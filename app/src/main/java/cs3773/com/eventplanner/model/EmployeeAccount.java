@@ -2,6 +2,10 @@ package cs3773.com.eventplanner.model;
 
 import java.util.UUID;
 
+import cs3773.com.eventplanner.server.ServerLink;
+import cs3773.com.eventplanner.server.ServerRequest;
+import cs3773.com.eventplanner.server.ServerRequestException;
+
 /**
  * Created by Rodney on 3/26/2015.
  * <p/>
@@ -18,7 +22,19 @@ public class EmployeeAccount extends Account {
 
     @Override
     public boolean saveAccount() {
-        return false;
+        ServerRequest request = new ServerRequest(ServerLink.UPDATE_ACCOUNT);
+        request.put("account_id", getAccountNumber().toString());
+        request.put("phone_number", getPhoneNumber());
+        request.put("email", getEmail());
+        request.put("full_name", getFullName());
+
+        try {
+            request.send();
+        } catch (ServerRequestException sre) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

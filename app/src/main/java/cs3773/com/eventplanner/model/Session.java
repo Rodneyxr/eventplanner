@@ -32,7 +32,6 @@ public class Session {
 
             String result = request.getResponse();
             if (result.equals("false")) {
-                System.out.println("*********** no match *************");
                 return false;
             }
 

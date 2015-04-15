@@ -29,6 +29,9 @@ public class ServerRequest {
     // key and value pairs to be sent to the server
     private HashMap<String, String> map;
 
+    // the last error message from the server
+    private static String lastErrorMessage;
+
     /**
      * @param link the link containing the URL to send the request to
      */
@@ -81,11 +84,14 @@ public class ServerRequest {
 
         } catch (UnsupportedEncodingException uee) {
             // should never happen since UTF-8 is almost guaranteed
-            throw new ServerRequestException("ServerRequest.send(): UnsupportedEncodingException");
+            lastErrorMessage = "ServerRequest.send(): UnsupportedEncodingException";
+            throw new ServerRequestException(lastErrorMessage);
         } catch (MalformedURLException mue) {
-            throw new ServerRequestException("ServerRequest.send(): MalformedURLException");
+            lastErrorMessage = "ServerRequest.send(): MalformedURLException";
+            throw new ServerRequestException(lastErrorMessage);
         } catch (IOException ioe) {
-            throw new ServerRequestException("ServerRequest.send(): IOException (error communicating with the server)");
+            lastErrorMessage = "ServerRequest.send(): IOException (error communicating with the server)";
+            throw new ServerRequestException(lastErrorMessage);
         }
 
         return this;
@@ -103,7 +109,8 @@ public class ServerRequest {
             reader.close();
             response = sb.toString();
         } catch (IOException ioe) {
-            throw new ServerRequestException("ServerRequest.readResponse(): IOException (An error occurred while reading from the server)");
+            lastErrorMessage = "ServerRequest.readResponse(): IOException (An error occurred while reading from the server)";
+            throw new ServerRequestException(lastErrorMessage);
         }
     }
 
@@ -117,6 +124,10 @@ public class ServerRequest {
     public void reset() {
         response = null;
         map.clear();
+    }
+
+    public static String getLastErrorMessage() {
+        return lastErrorMessage;
     }
 
 

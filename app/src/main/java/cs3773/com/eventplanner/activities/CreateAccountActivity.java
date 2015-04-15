@@ -160,7 +160,6 @@ public class CreateAccountActivity extends BaseActivity {
                 errorDialog("That username already exists.");
                 mEditTextUsername.requestFocus();
                 mEditTextUsername.selectAll();
-
             } else {
                 errorDialog("Unable to create account.");
             }
