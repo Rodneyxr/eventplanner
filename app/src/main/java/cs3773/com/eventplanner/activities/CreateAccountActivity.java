@@ -125,7 +125,7 @@ public class CreateAccountActivity extends BaseActivity {
         @Override
         protected String doInBackground(String... params) {
             ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
-            request.put("username", username);
+            //request.put("username", username);
             request.put("password", Tools.sha256Base64(password));
             request.put("account_id", UUID.randomUUID().toString());
             request.put("phone_number", "");

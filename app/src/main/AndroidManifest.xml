@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cs3773.com.eventplanner" >
 
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -25,16 +28,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MenuActivity"
-            android:label="@string/title_activity_menu" >
-        </activity>
-        <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base" >
-        </activity>
-        <activity
-            android:name=".activities.TestActivity"
-            android:label="@string/title_activity_test" >
         </activity>
         <activity
             android:name=".activities.CalendarActivity"
@@ -55,6 +50,18 @@
         <activity
             android:name=".activities.CreateAccountActivity"
             android:label="@string/title_activity_create_account" >
+        </activity>
+        <activity
+            android:name=".activities.CreateTeamActivity"
+            android:label="@string/title_activity_create_team" >
+        </activity>
+        <activity
+            android:name=".activities.CreateEventActivity"
+            android:label="@string/title_activity_create_event" >
+        </activity>
+        <activity
+            android:name=".activities.CalendarViewActivity"
+            android:label="@string/title_activity_calendar_view" >
         </activity>
     </application>
 
