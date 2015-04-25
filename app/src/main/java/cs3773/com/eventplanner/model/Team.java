@@ -5,9 +5,9 @@ package cs3773.com.eventplanner.model;
  */
 public class Team {
     // Team Name
-    // Team Supervior
+    // Team Supervisor
     // Event Manager
-    // Event Manager asistant
+    // Event Manager assistant
     // General Member
     // Description
 

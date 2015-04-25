@@ -35,7 +35,21 @@ public enum ServerLink {
      * $email
      * $full_name
      */
-    UPDATE_ACCOUNT("https://rodneyxr.com/ep/ep_update_account.php");
+    UPDATE_ACCOUNT("https://rodneyxr.com/ep/ep_update_account.php"),
+
+    /**
+     * Creates the user's team information in the database given the account_id
+     * <p/>
+     * $team_name
+     * $team_supervisor
+     * $event_manager
+     * $event_manager_assistant
+     * $member1
+     * $member2
+     * $member3
+     * $team_description
+     */
+    CREATE_TEAM("https://rodneyxr.com/ep/ep_create_team.php");
 
     String url;
 
