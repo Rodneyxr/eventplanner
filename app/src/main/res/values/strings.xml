@@ -29,6 +29,7 @@
     <string name="navdrawer_create_account">Create Account</string>
     <string name="navdrawer_create_team">Create Team</string>
     <string name="navdrawer_create_event">Create Event</string>
+    <string name="navdrawer_logout">Logout</string>
 
 
     <string name="hello_world">Hello world!</string>

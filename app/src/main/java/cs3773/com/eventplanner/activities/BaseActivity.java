@@ -45,6 +45,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_ACCOUNT_CREATE = 4;
     protected static final int NAVDRAWER_ITEM_TEAM_CREATE = 5;
     protected static final int NAVDRAWER_ITEM_EVENT_CREATE = 6;
+    protected static final int NAVDRAWER_ITEM_LOGOUT = 7;
 
 
     // titles for navdrawer items (indices must correspond to the above)
@@ -56,6 +57,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.string.navdrawer_create_account,
             R.string.navdrawer_create_team,
             R.string.navdrawer_create_event,
+            R.string.navdrawer_logout,
 
     };
 
@@ -68,6 +70,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.drawable.ic_drawer, // create account
             R.drawable.ic_drawer, // create team
             R.drawable.ic_drawer, // create event
+            R.drawable.ic_drawer, // logout
     };
 
     // delay to launch nav drawer item, to allow close animation to play
@@ -213,9 +216,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_TEAM_CREATE);
         mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
 
-
         if (Session.getAccount().getRole() == Role.admin)
             mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_CREATE);
+
+        mNavDrawerItems.add(NAVDRAWER_ITEM_LOGOUT);
 
 //        if (Session.getAccount().getRole() == Role.event_manager)
 //            mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
@@ -303,6 +307,11 @@ public abstract class BaseActivity extends ActionBarActivity {
                 break;
             case NAVDRAWER_ITEM_EVENT_CREATE:
                 intent = new Intent(this, CreateEventActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case NAVDRAWER_ITEM_LOGOUT:
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
