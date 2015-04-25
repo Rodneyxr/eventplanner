@@ -11,6 +11,9 @@
   limitations under the License.
   -->
 <resources>
+    <item name="grey" type="color">#555555</item>
+    <item name="green" type="color">#4499CC00</item>
+    <item name="darkgreen" type="color">#FF669900</item>
     <color name="transparent">#00000000</color>
 
     <color name="body_text_1">#de000000</color>

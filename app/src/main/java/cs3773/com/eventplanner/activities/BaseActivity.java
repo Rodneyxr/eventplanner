@@ -43,6 +43,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected static final int NAVDRAWER_ITEM_CHAT = 2;
     protected static final int NAVDRAWER_ITEM_ACCOUNT_INFO = 3;
     protected static final int NAVDRAWER_ITEM_ACCOUNT_CREATE = 4;
+    protected static final int NAVDRAWER_ITEM_TEAM_CREATE = 5;
+    protected static final int NAVDRAWER_ITEM_EVENT_CREATE = 6;
+
 
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
@@ -51,6 +54,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.string.navdrawer_item_chat,
             R.string.navdrawer_item_account_info,
             R.string.navdrawer_create_account,
+            R.string.navdrawer_create_team,
+            R.string.navdrawer_create_event,
+
     };
 
     // icons for navdrawer items (indices must correspond to above array)
@@ -112,7 +118,7 @@ public abstract class BaseActivity extends ActionBarActivity {
             System.out.println("******************** mdrawerlayout is null");
             return;
         }
-        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.background_material_dark));
+        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.background_material_light));
         ScrollView navDrawer = (ScrollView) mDrawerLayout.findViewById(R.id.navdrawer);
         if (selfItem == NAVDRAWER_ITEM_INVALID) {
             System.out.println("************************do not show navbar");
@@ -202,10 +208,15 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_CHAT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_INFO);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_TEAM_CREATE);
+        mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
+
 
         if (Session.getAccount().getRole() == Role.admin)
             mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_CREATE);
 
+//        if (Session.getAccount().getRole() == Role.event_manager)
+//            mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
         createNavDrawerItems();
     }
 
@@ -259,7 +270,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         Intent intent;
         switch (item) {
             case NAVDRAWER_ITEM_CALENDAR:
-                intent = new Intent(this, CalendarActivity.class);
+                intent = new Intent(this, CalendarViewActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -280,6 +291,16 @@ public abstract class BaseActivity extends ActionBarActivity {
                 break;
             case NAVDRAWER_ITEM_ACCOUNT_CREATE:
                 intent = new Intent(this, CreateAccountActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case NAVDRAWER_ITEM_TEAM_CREATE:
+                intent = new Intent(this, CreateTeamActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case NAVDRAWER_ITEM_EVENT_CREATE:
+                intent = new Intent(this, CreateEventActivity.class);
                 startActivity(intent);
                 finish();
                 break;

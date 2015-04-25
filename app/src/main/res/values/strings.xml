@@ -27,6 +27,9 @@
     <string name="navdrawer_item_chat">Chat</string>
     <string name="navdrawer_item_account_info">Account Info</string>
     <string name="navdrawer_create_account">Create Account</string>
+    <string name="navdrawer_create_team">Create Team</string>
+    <string name="navdrawer_create_event">Create Event</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
@@ -39,6 +42,10 @@
     <string name="system_generated">[System Generated]</string>
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_role">Select Role</string>
+    <string name="title_activity_create_team">CreateTeamActivity</string>
+    <string name="title_activity_calender_view">CalenderViewActivity</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
+    <string name="title_activity_calendar_view">CalendarViewActivity</string>
 
 
 </resources>
