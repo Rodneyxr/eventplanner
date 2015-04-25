@@ -270,7 +270,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         Intent intent;
         switch (item) {
             case NAVDRAWER_ITEM_CALENDAR:
-                intent = new Intent(this, CalendarViewActivity.class);
+                intent = new Intent(this, CalendarActivity.class);
                 startActivity(intent);
                 finish();
                 break;
