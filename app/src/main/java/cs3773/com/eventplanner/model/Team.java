@@ -1,9 +1,11 @@
 package cs3773.com.eventplanner.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Matthew on 4/25/2015.
  */
-public class Team {
+public class Team implements Serializable {
     // Team Name
     // Team Supervisor
     // Event Manager

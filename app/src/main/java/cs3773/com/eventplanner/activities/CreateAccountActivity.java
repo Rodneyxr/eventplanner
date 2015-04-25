@@ -23,11 +23,13 @@ public class CreateAccountActivity extends BaseActivity {
     // components
     private EditText mEditTextUsername;
     private EditText mEditTextPassword;
+    private EditText mEditTextValidatePassword;
     private Spinner mSpinnerRole;
 
     // data
     private String username;
     private String password;
+    private String validatePassword;
     private String spinnerSelection;
 
     private CreateAccountTask mCreateAccountTask;
@@ -39,6 +41,7 @@ public class CreateAccountActivity extends BaseActivity {
 
         mEditTextUsername = (EditText) findViewById(R.id.editTextUsername);
         mEditTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        mEditTextValidatePassword = (EditText) findViewById(R.id.editValidatePassword);
         mSpinnerRole = (Spinner) findViewById(R.id.spinner);
 
         mSpinnerRole.setAdapter(new ArrayAdapter<Role>(this, android.R.layout.simple_spinner_item, Role.values()));
@@ -73,6 +76,7 @@ public class CreateAccountActivity extends BaseActivity {
     public void getNewAccountInfo() {
         username = mEditTextUsername.getText().toString();
         password = mEditTextPassword.getText().toString();
+        validatePassword = mEditTextValidatePassword.getText().toString();
         spinnerSelection = mSpinnerRole.getSelectedItem().toString();
     }
 
@@ -95,6 +99,10 @@ public class CreateAccountActivity extends BaseActivity {
         } else if (!password.matches(".*[a-zA-z].*") || !password.matches(".*[0-9].*")) {
             errorDialog("Password must contain at least 1 character and at least 1 number.");
             mEditTextPassword.requestFocus();
+            return;
+        } else if (password != validatePassword) {
+            errorDialog("Passwords don't match. Retry!");
+            mEditTextValidatePassword.requestFocus();
             return;
         }
 
