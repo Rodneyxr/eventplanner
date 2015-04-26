@@ -41,9 +41,6 @@ public class LoginActivity extends Activity {
      */
     private UserLoginTask mAuthTask = null;
 
-    //Parse Keys
-    public static final String APP_KEY_ID = "rcOmi6CtnvAiirDXzxycyvpV9286NQFzLGpCdE8L";
-    public static final String APP_CLIENT_ID = "jJna9Mx1osBR8chefTVg4fzOpTGFjAIUI0DAYf7W";
     //parse Login
     private String userName;
     private String password;
@@ -59,9 +56,6 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Parse.enableLocalDatastore(this);
-        ParseObject.registerSubclass(Message.class);
-        Parse.initialize(this, APP_KEY_ID, APP_CLIENT_ID);
 
         //parse
         userName = "ParseUser";
