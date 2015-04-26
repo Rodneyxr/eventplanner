@@ -12,7 +12,8 @@ import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
 
 public class CreateEventActivity extends BaseActivity {
-    private EditText mEditTextEvntNm;
+   //components
+     private EditText mEditTextEvntNm;
     private EditText mEditTextEvntDesrptn;
     private EditText mEditTextEvntLctn;
     private EditText mEditTextEvntTim;
@@ -20,7 +21,7 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntTm;
     private EditText mEditTextEvntHst;
     private EditText mEditTextEvntAduinc;
-
+//data
     private String EvntNm;
     private String EvntDesrptn;
     private String EvntLctn;
@@ -29,7 +30,6 @@ public class CreateEventActivity extends BaseActivity {
     private String EvntTm;
     private String EvntHst;
     private String EvntAduinc;
-
 
     private CreateEventTask mCreateEventTask;
 
