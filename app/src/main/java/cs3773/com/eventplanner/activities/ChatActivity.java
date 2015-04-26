@@ -47,8 +47,6 @@ public class ChatActivity extends BaseActivity {
 
     private  static final int MAX_CHAT_MSG_TO_SHOW = 70;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

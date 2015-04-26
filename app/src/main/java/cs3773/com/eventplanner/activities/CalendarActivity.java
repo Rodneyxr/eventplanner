@@ -30,7 +30,7 @@ public class CalendarActivity extends BaseActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
                 // TODO: open up events on click
-                Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), day + "/" + month + "/" + year, Toast.LENGTH_SHORT).show();
             }
         });
     }

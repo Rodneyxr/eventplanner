@@ -59,14 +59,9 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         Parse.enableLocalDatastore(this);
-
         ParseObject.registerSubclass(Message.class);
-
         Parse.initialize(this, APP_KEY_ID, APP_CLIENT_ID);
-
-
 
         //parse
         userName = "ParseUser";
@@ -100,7 +95,8 @@ public class LoginActivity extends Activity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-    public void parseCreateUser(){
+
+    public void parseCreateUser() {
         //CREATE PARSE USER
         ParseUser user = new ParseUser();
         user.setUsername("ParseUser");
@@ -114,15 +110,14 @@ public class LoginActivity extends Activity {
                 if (e == null) {
                     //we are good!
                     Toast.makeText(getApplicationContext(), "Parse is up and Running", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Parse Connected.(ERROR !)", Toast.LENGTH_LONG).show();
                 }
 
-                }
+            }
         });
 
-      }
-
+    }
 
 
     public void parseLogin() {
@@ -280,7 +275,7 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-                Intent menuIntent = new Intent(LoginActivity.this, ChatActivity.class);
+                Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(menuIntent);
                 finish();
             } else {
