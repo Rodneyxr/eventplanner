@@ -1,71 +1,195 @@
 package cs3773.com.eventplanner.activities;
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.provider.CalendarContract.Events;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-
-import java.util.Calendar;
+import android.widget.Button;
+import android.widget.EditText;
 
 import cs3773.com.eventplanner.R;
-
+import cs3773.com.eventplanner.server.ServerLink;
+import cs3773.com.eventplanner.server.ServerRequest;
+import cs3773.com.eventplanner.server.ServerRequestException;
 
 public class CreateEventActivity extends BaseActivity {
+    private EditText mEditTextEvntNm;
+    private EditText mEditTextEvntDesrptn;
+    private EditText mEditTextEvntLctn;
+    private EditText mEditTextEvntTim;
+    private EditText mEditTextEvntDt;
+    private EditText mEditTextEvntTm;
+    private EditText mEditTextEvntHst;
+    private EditText mEditTextEvntAduinc;
+
+    private String EvntNm;
+    private String EvntDesrptn;
+    private String EvntLctn;
+    private String EvntTim;
+    private String EvntDt;
+    private String EvntTm;
+    private String EvntHst;
+    private String EvntAduinc;
+
+
+    private CreateEventTask mCreateEventTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        mEditTextEvntNm = (EditText) findViewById(R.id.editTextEvntNm);
+        mEditTextEvntDesrptn = (EditText) findViewById(R.id.editTextEvntDesrptn);
+        mEditTextEvntLctn = (EditText) findViewById(R.id.editTextEvntLctn);
+        mEditTextEvntTim = (EditText) findViewById(R.id.editTextEvntTim);
+        mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
+        mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
+        mEditTextEvntHst = (EditText) findViewById(R.id.editTextEvntHst);
+        mEditTextEvntAduinc = (EditText) findViewById(R.id.editTextEvntAduinc);
+        mEditTextEvntTm = (EditText) findViewById(R.id.editTextEvntTm);
+
+        Button mCreateEventButton = (Button) findViewById(R.id.buttonCreateEventInfo);
+        mCreateEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getNewEvntInfo();
+                createTeam();
+            }
+        });
+
+    }
+    public void getNewEvntInfo() {
+        EvntNm = mEditTextEvntNm.getText().toString();
+        EvntDesrptn = mEditTextEvntDesrptn.getText().toString();
+        EvntLctn = mEditTextEvntLctn.getText().toString();
+        EvntTim = mEditTextEvntTim.getText().toString();
+        EvntDt = mEditTextEvntDt.getText().toString();
+        EvntHst = mEditTextEvntHst.getText().toString();
+        EvntAduinc = mEditTextEvntAduinc.getText().toString();
+        EvntTm = mEditTextEvntTm.getText().toString();
+
+
+
     }
 
+    public void createTeam() {
+        if (EvntNm.isEmpty()) {
+            errorDialog("Event name cannot be empty.");
+            mEditTextEvntNm.requestFocus();
+            return;
+        }
+        if (EvntDesrptn.isEmpty()) {
+            errorDialog("Event Description cannot be empty.");
+            mEditTextEvntDesrptn.requestFocus();
+            return;
+        }
+        if (EvntLctn.isEmpty()) {
+            errorDialog("Event Location cannot be empty.");
+            mEditTextEvntLctn.requestFocus();
+            return;
+        }
+        if (EvntTim.isEmpty()) {
+            errorDialog("Event time  cannot be empty.");
+            mEditTextEvntTim.requestFocus();
+            return;
+        }
+        if (EvntDt.isEmpty()) {
+            errorDialog("Event Date cannot be empty.");
+            mEditTextEvntDt.requestFocus();
+            return;
+        }
+        if (EvntHst.isEmpty()) {
+            errorDialog("Event host cannot be empty.");
+            mEditTextEvntHst.requestFocus();
+            return;
+        }
+        if (EvntAduinc.isEmpty()) {
+            errorDialog("Event audience cannot be empty.");
+            mEditTextEvntAduinc.requestFocus();
+            return;
+        }
+        if (EvntTm.isEmpty()) {
+            errorDialog("Event team[s] cannot be empty.");
+            mEditTextEvntTm.requestFocus();
+            return;
+        }
+
+        mCreateEventTask = new CreateEventTask();
+        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc );
+
+    }
+
+    public class CreateEventTask extends AsyncTask<String, Void, String> {
+
+        CreateEventTask() {
+            getNewEvntInfo();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            //TO-DO Create_EVENT
+            ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
+
+            //request.put("username", username)
+            request.put("event_name", EvntNm);
+            request.put("event_description", EvntDesrptn);
+            request.put("event_location", EvntLctn);
+            request.put("event_time", EvntTim);
+            request.put("event_date", EvntDt);
+            request.put("event_host", EvntHst);
+            request.put("event_audience", EvntAduinc);
+            request.put("event_teams", EvntTm);
+
+            try {
+                request.send();
+            } catch (ServerRequestException sre) {
+                System.err.println(sre.getMessage());
+                return sre.getMessage();
+            }
+
+            String result = request.getResponse();
+            System.out.println("** result: " + result);
+
+            return result;
+        }
+        @Override
+        protected void onPostExecute(final String result) {
+            mCreateEventTask = null;
+
+            if (result.equals("")) {
+                showDialog("Created Event", "Your event has been created!");
+                mEditTextEvntNm.setText("");;
+                mEditTextEvntDesrptn.setText("");;
+                mEditTextEvntLctn.setText("");;
+                mEditTextEvntTim.setText("");;
+                mEditTextEvntDt.setText("");;
+                mEditTextEvntHst.setText("");;
+                mEditTextEvntAduinc.setText("");;
+                mEditTextEvntDesrptn.setText("");;
+                mEditTextEvntTm.setText("");;
+                mEditTextEvntNm.requestFocus();
+
+            }
+            //not sure what key is and if it is even needed.
+            else if (result.contains("Duplicate entry") && result.contains("for key 'event'"))
+            {
+                errorDialog("That event name already exists.");
+                mEditTextEvntNm.requestFocus();
+                mEditTextEvntNm.selectAll();
+            }
+            else {
+                errorDialog("Unable to create event.");
+            }
+        }
+        @Override
+        protected void onCancelled() {
+            mCreateEventTask = null;
+        }
+    }
     @Override
     protected int getSelfNavDrawerItem() {
         return NAVDRAWER_ITEM_EVENT_CREATE;
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_create_event, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    public void onAddEventClicked(View view) {
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setType("vnd.android.cursor.item/event");
-
-        Calendar cal = Calendar.getInstance();
-        long startTime = cal.getTimeInMillis();
-        long endTime = cal.getTimeInMillis() + 60 * 60 * 1000;
-
-        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime);
-        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
-
-        intent.putExtra(Events.TITLE, "Event title");
-        intent.putExtra(Events.DESCRIPTION, "Event description");
-        intent.putExtra(Events.EVENT_LOCATION, "Event Location");
-        intent.putExtra(Events.RRULE, "FREQ=YEARLY");
-
-        startActivity(intent);
-    }
 }
-

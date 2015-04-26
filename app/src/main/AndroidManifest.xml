@@ -28,15 +28,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BaseActivity"
+            android:name=".activities.BaseActivity"
             android:label="@string/title_activity_base" >
         </activity>
         <activity
-            android:name=".activities.CalendarActivity"
+            android:name=".activities.CalendarViewActivity"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
-            android:name=".activities.EventActivity"
+            android:name=".activities.CreateEventActivity"
             android:label="@string/title_activity_event" >
         </activity>
         <activity
@@ -56,12 +56,8 @@
             android:label="@string/title_activity_create_team" >
         </activity>
         <activity
-            android:name=".activities.CreateEventActivity"
+            android:name=".activities.EventActivity2"
             android:label="@string/title_activity_create_event" >
-        </activity>
-        <activity
-            android:name=".activities.CalendarViewActivity"
-            android:label="@string/title_activity_calendar_view" >
         </activity>
     </application>
 

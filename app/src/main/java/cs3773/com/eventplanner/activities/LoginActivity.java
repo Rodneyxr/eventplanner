@@ -199,7 +199,7 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-                Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
+                Intent menuIntent = new Intent(LoginActivity.this, ChatActivity.class);
                 startActivity(menuIntent);
                 finish();
             } else {
