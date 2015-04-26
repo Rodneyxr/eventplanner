@@ -33,7 +33,7 @@ public class CreateEventActivity extends BaseActivity {
 //event
     private CreateEventTask mCreateEventTask;
 
-
+//a
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

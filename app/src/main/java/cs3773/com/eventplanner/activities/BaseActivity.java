@@ -22,6 +22,7 @@ import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.model.Role;
 import cs3773.com.eventplanner.model.Session;
 
+//asa
 /**
  * A base activity that handles common functionality in the app. This includes the
  * navigation drawer, login and authentication, Action Bar tweaks, amongst others.
