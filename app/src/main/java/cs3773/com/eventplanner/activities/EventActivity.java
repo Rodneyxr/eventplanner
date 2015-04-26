@@ -14,7 +14,7 @@ import cs3773.com.eventplanner.R;
 public class EventActivity extends BaseActivity {
 
     private String   EventPlanner;
-
+//ll
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
