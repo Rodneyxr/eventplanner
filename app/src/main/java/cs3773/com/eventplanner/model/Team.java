@@ -21,10 +21,9 @@ public class Team implements Serializable {
     private String description;
 
     public Team() {
-
     }
 
-    public Team(String teamName,String teamSupervisor, String eventManager, String eventManagerAssistant, String generalMember, String description) {
+    public Team(String teamName, String teamSupervisor, String eventManager, String eventManagerAssistant, String generalMember, String description) {
         this.teamName = teamName;
         this.teamSupervisor = teamSupervisor;
         this.eventManager = eventManager;

@@ -1,12 +1,11 @@
 package cs3773.com.eventplanner.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Matthew on 4/25/2015.
  */
-public class Event{
+public class Event {
 
     private String eventName;
     private String date;
