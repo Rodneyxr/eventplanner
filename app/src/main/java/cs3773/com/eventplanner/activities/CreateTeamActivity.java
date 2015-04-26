@@ -135,16 +135,17 @@ public class CreateTeamActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            //TO-DO Create_TEAM
             ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
             //request.put("username", username);
-            request.put("team name", TmNm);
-            request.put("team event manager", TmEvntMngr);
-            request.put("team event manager assistant", TmEvntMngrAsstnt);
-            request.put("team supervisor", TmSprvsr);
-            request.put("team general member 1", TmGenMmbr1);
-            request.put("team general member 2", TmGenMmbr2);
-            request.put("team general member 3", TmGenMmbr3);
-            request.put("Team description", TmDscrptn);
+            request.put("team_name", TmNm);
+            request.put("event_manager", TmEvntMngr);
+            request.put("event_manager_assistant", TmEvntMngrAsstnt);
+            request.put("team_supervisor", TmSprvsr);
+            request.put("member1", TmGenMmbr1);
+            request.put("member2", TmGenMmbr2);
+            request.put("member3", TmGenMmbr3);
+            request.put("team_description", TmDscrptn);
 
             try {
                 request.send();

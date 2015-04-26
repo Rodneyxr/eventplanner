@@ -16,9 +16,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.model.Message;
 import cs3773.com.eventplanner.model.Session;
 
 
@@ -32,6 +41,13 @@ public class LoginActivity extends Activity {
      */
     private UserLoginTask mAuthTask = null;
 
+    //Parse Keys
+    public static final String APP_KEY_ID = "rcOmi6CtnvAiirDXzxycyvpV9286NQFzLGpCdE8L";
+    public static final String APP_CLIENT_ID = "jJna9Mx1osBR8chefTVg4fzOpTGFjAIUI0DAYf7W";
+    //parse Login
+    private String userName;
+    private String password;
+
     // UI references.
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
@@ -43,6 +59,18 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Parse.enableLocalDatastore(this);
+
+        ParseObject.registerSubclass(Message.class);
+
+        Parse.initialize(this, APP_KEY_ID, APP_CLIENT_ID);
+
+
+
+        //parse
+        userName = "ParseUser";
+        password = "wg498nodpf228hg";
 
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -64,11 +92,64 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                parseCreateUser();
+                parseLogin();
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+    public void parseCreateUser(){
+        //CREATE PARSE USER
+        ParseUser user = new ParseUser();
+        user.setUsername("ParseUser");
+        user.setPassword("wg498nodpf228hg");
+        user.setEmail("BobTheBuilder@PBS.com");
+
+        //Add Parse USER
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    //we are good!
+                    Toast.makeText(getApplicationContext(), "Parse is up and Running", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Parse Connected.(ERROR !)", Toast.LENGTH_LONG).show();
+                }
+
+                }
+        });
+
+      }
+
+
+
+    public void parseLogin() {
+
+        String uName = userName;
+        String pWord = password;
+
+        if (!uName.equals("") || !pWord.equals("")) {
+            ParseUser.logInInBackground(uName, pWord, new LogInCallback() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                    if (e == null) {
+
+                        Toast.makeText(getApplicationContext(), "Login Successfully!"
+                                , Toast.LENGTH_LONG).show();
+
+                        //startActivity(new Intent(LoginActivity.this, ChatActivity.class));
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Not logged in",
+                                Toast.LENGTH_LONG).show();
+
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -199,7 +280,7 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-                Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
+                Intent menuIntent = new Intent(LoginActivity.this, ChatActivity.class);
                 startActivity(menuIntent);
                 finish();
             } else {

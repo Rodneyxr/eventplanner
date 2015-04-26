@@ -15,13 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.model.Role;
 import cs3773.com.eventplanner.model.Session;
 
+//asa
 /**
  * A base activity that handles common functionality in the app. This includes the
  * navigation drawer, login and authentication, Action Bar tweaks, amongst others.
@@ -214,7 +214,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_CHAT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_INFO);
 
-        if (Session.getAccount().getRole() == Role.event_manager || Session.getAccount().getRole() == Role.event_manager_assistant) {
+        if (Session.getAccount().getRole() == Role.event_manager || Session.getAccount().getRole() == Role.event_manager_assistant ) {
             mNavDrawerItems.add(NAVDRAWER_ITEM_TEAM_CREATE);
             mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
         }
