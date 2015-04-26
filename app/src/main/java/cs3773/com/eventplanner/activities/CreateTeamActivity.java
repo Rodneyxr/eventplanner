@@ -1,14 +1,13 @@
 package cs3773.com.eventplanner.activities;
 
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import java.util.UUID;
+
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
@@ -26,16 +25,17 @@ public class CreateTeamActivity extends BaseActivity {
     private EditText mEditTextTmDscrptn;
 
     //data
-    private String   TmNm;
-    private String   TmGenMmbr1;
-    private String   TmGenMmbr2;
-    private String   TmGenMmbr3;
-    private String   TmSprvsr;
-    private String   TmEvntMngr;
-    private String   TmEvntMngrAsstnt;
-    private String   TmDscrptn;
+    private String TmNm;
+    private String TmGenMmbr1;
+    private String TmGenMmbr2;
+    private String TmGenMmbr3;
+    private String TmSprvsr;
+    private String TmEvntMngr;
+    private String TmEvntMngrAsstnt;
+    private String TmDscrptn;
 
     private CreateTeamTask mCreateTeamTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +78,7 @@ public class CreateTeamActivity extends BaseActivity {
         TmDscrptn = mEditTextTmDscrptn.getText().toString();
 
     }
+
     public void createTeam() {
         if (TmNm.isEmpty()) {
             errorDialog("Team name cannot be empty.");
@@ -105,26 +106,9 @@ public class CreateTeamActivity extends BaseActivity {
             mEditTextTmDscrptn.requestFocus();
             return;
         }
-//        if (TmGenMmbr1.isEmpty()) {
-//            errorDialog("");
-//            mEditTextTmGenMmbr1.requestFocus();
-//            return;
-//        }
-//        if (TmGenMmbr2.isEmpty()) {
-//            errorDialog("Username must be at least 5 characters long.");
-//            mEditTextTmGenMmbr2.requestFocus();
-//            return;
-//        }
-//        if (TmGenMmbr3.isEmpty()) {
-//            errorDialog("Username must be at least 5 characters long.");
-//            mEditTextTmGenMmbr3.requestFocus();
-//            return;
-//        }
 
         mCreateTeamTask = new CreateTeamTask();
-        mCreateTeamTask.execute(TmNm, TmEvntMngr, TmEvntMngrAsstnt, TmSprvsr, TmGenMmbr1, TmGenMmbr2, TmGenMmbr3, TmDscrptn );
-
-
+        mCreateTeamTask.execute(TmNm, TmEvntMngr, TmEvntMngrAsstnt, TmSprvsr, TmGenMmbr1, TmGenMmbr2, TmGenMmbr3, TmDscrptn);
     }
 
     public class CreateTeamTask extends AsyncTask<String, Void, String> {
@@ -135,9 +119,7 @@ public class CreateTeamActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            //TO-DO Create_TEAM
-            ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
-            //request.put("username", username);
+            ServerRequest request = new ServerRequest(ServerLink.CREATE_TEAM);
             request.put("team_name", TmNm);
             request.put("event_manager", TmEvntMngr);
             request.put("event_manager_assistant", TmEvntMngrAsstnt);
@@ -166,25 +148,23 @@ public class CreateTeamActivity extends BaseActivity {
 
             if (result.equals("")) {
                 showDialog("Created Team", "Your team has been created!");
-                mEditTextTmNm.setText("");;
-                mEditTextTmGenMmbr1.setText("");;
-                mEditTextTmGenMmbr2.setText("");;
-                mEditTextTmGenMmbr3.setText("");;
-                mEditTextTmSprvsr.setText("");;
-                mEditTextTmEvntMngr.setText("");;
-                mEditTextTmEvntMngrAsstnt.setText("");;
-                mEditTextTmDscrptn.setText("");;
+                mEditTextTmNm.setText("");
+                mEditTextTmGenMmbr1.setText("");
+                mEditTextTmGenMmbr2.setText("");
+                mEditTextTmGenMmbr3.setText("");
+                mEditTextTmSprvsr.setText("");
+                mEditTextTmEvntMngr.setText("");
+                mEditTextTmEvntMngrAsstnt.setText("");
+                mEditTextTmDscrptn.setText("");
                 mEditTextTmNm.requestFocus();
 
             }
             //not sure what key is and if it is even needed.
-            else if (result.contains("Duplicate entry") && result.contains("for key 'team'"))
-            {
+            else if (result.contains("Duplicate entry") && result.contains("for key 'team'")) {
                 errorDialog("That team name already exists.");
                 mEditTextTmNm.requestFocus();
                 mEditTextTmNm.selectAll();
-            }
-            else {
+            } else {
                 errorDialog("Unable to create team.");
             }
         }

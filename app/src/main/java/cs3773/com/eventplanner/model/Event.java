@@ -15,7 +15,6 @@ public class Event {
     private String targetAudience;
     private ArrayList<Team> teamList;
 
-
     public Event() {
 
     }
