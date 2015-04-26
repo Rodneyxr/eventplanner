@@ -27,12 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activities.BaseActivity"
-            android:label="@string/title_activity_base" >
-        </activity>
-        <activity
-            android:name=".activities.CalendarViewActivity"
+            android:name=".activities.CalendarActivity"
             android:label="@string/title_activity_calendar" >
         </activity>
         <activity
@@ -56,7 +53,7 @@
             android:label="@string/title_activity_create_team" >
         </activity>
         <activity
-            android:name=".activities.EventActivity2"
+            android:name=".activities.EventActivity"
             android:label="@string/title_activity_create_event" >
         </activity>
     </application>

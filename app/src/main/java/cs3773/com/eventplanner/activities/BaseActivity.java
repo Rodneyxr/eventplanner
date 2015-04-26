@@ -211,7 +211,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_CHAT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_INFO);
 
-        if (Session.getAccount().getRole() == Role.event_manager || Session.getAccount().getRole() == Role.event_manager_assistant || Session.getAccount().getRole() == Role.admin) {
+        if (Session.getAccount().getRole() == Role.event_manager || Session.getAccount().getRole() == Role.event_manager_assistant ) {
             mNavDrawerItems.add(NAVDRAWER_ITEM_TEAM_CREATE);
             mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
         }
@@ -279,7 +279,7 @@ public abstract class BaseActivity extends ActionBarActivity {
                 finish();
                 break;
             case NAVDRAWER_ITEM_EVENT:
-                intent = new Intent(this, EventActivity2.class);
+                intent = new Intent(this, EventActivity.class);
                 startActivity(intent);
                 finish();
                 break;

@@ -30,7 +30,7 @@ public class CreateEventActivity extends BaseActivity {
     private String EvntTm;
     private String EvntHst;
     private String EvntAduinc;
-
+//event
     private CreateEventTask mCreateEventTask;
 
 

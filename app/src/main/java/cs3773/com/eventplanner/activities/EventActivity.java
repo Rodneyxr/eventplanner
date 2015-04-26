@@ -11,7 +11,7 @@ import java.util.Calendar;
 import cs3773.com.eventplanner.R;
 
 
-public class EventActivity2 extends BaseActivity {
+public class EventActivity extends BaseActivity {
 
     private String   EventPlanner;
 
@@ -20,7 +20,7 @@ public class EventActivity2 extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
     }
-
+//check
     @Override
     protected int getSelfNavDrawerItem() {
         return NAVDRAWER_ITEM_EVENT;
