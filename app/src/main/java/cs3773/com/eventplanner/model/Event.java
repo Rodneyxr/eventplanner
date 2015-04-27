@@ -1,6 +1,7 @@
 package cs3773.com.eventplanner.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Matthew on 4/25/2015.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Event {
 
     private String eventName;
-    private String date;
+    private Date date;
     private String time;
     private String location;
     private String description;
@@ -19,7 +20,7 @@ public class Event {
 
     }
 
-    public Event(String eventName, String date, String location, String description, String targetAudience, ArrayList<Team> team) {
+    public Event(String eventName, Date date, String location, String description, String targetAudience, ArrayList<Team> team) {
         this.eventName = eventName;
         this.date = date;
         this.location = location;
@@ -35,11 +36,11 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
