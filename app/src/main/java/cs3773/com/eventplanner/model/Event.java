@@ -14,7 +14,7 @@ public class Event {
     private String location;
     private String description;
     private String targetAudience;
-    private ArrayList<Team> teamList;
+    private ArrayList<Team> teamList = new ArrayList<Team>();
 
     public Event() {
 
