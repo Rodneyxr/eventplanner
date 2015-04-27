@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -36,12 +37,14 @@ public class ChatActivity extends BaseActivity {
     private String password;
 
     private EditText message;
+
     private Button sendMessageButton;
     private ProgressGenerator progressGenerator;
     public static final String USER_ID_KEY = "userId";
     private String currentUserId;
     private ListView listView;
     private ArrayList<Message> mMessages;
+
     private ChatAdapter mAdapter;
     private Handler handler = new Handler();
 
@@ -72,7 +75,6 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void messagePosting() {
-
         message = (EditText) findViewById(R.id.etMessage);
         sendMessageButton = (Button) findViewById(R.id.buttonSend);
         listView = (ListView) findViewById(R.id.listview_chat);

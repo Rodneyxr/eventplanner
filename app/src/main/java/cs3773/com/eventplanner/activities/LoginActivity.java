@@ -17,13 +17,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.Random;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
@@ -42,8 +44,9 @@ public class LoginActivity extends Activity {
     private UserLoginTask mAuthTask = null;
 
     //parse Login
-    private String userName;
-    private String password;
+    private String userEmail;
+    private EditText userName;
+    private EditText password;
 
     // UI references.
     private AutoCompleteTextView mUsernameView;
@@ -57,9 +60,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //parse
-        userName = "ParseUser";
-        password = "wg498nodpf228hg";
 
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -81,45 +81,23 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                parseCreateUser();
-                parseLogin();
+                parseCreateOrLogin();
             }
         });
+
+
+        //parse
+        userName = (AutoCompleteTextView) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    public void parseCreateUser() {
-        //CREATE PARSE USER
-        ParseUser user = new ParseUser();
-        user.setUsername("ParseUser");
-        user.setPassword("wg498nodpf228hg");
-        user.setEmail("BobTheBuilder@PBS.com");
 
-        //Add Parse USER
-        user.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    //we are good!
-                    Toast.makeText(getApplicationContext(), "Parse is up and Running", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Parse Connected.(ERROR !)", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
-    }
-
-
-    public void parseLogin() {
-
-        String uName = userName;
-        String pWord = password;
-
-        if (!uName.equals("") || !pWord.equals("")) {
+    public void parseCreateOrLogin() {
+        final String uName = userName.getText().toString();
+        final String pWord = password.getText().toString();
             ParseUser.logInInBackground(uName, pWord, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
@@ -128,18 +106,37 @@ public class LoginActivity extends Activity {
                         Toast.makeText(getApplicationContext(), "Login Successfully!"
                                 , Toast.LENGTH_LONG).show();
 
-                        //startActivity(new Intent(LoginActivity.this, ChatActivity.class));
-
                     } else {
+                        //CREATE PARSE USER
+                        ParseUser user = new ParseUser();
+                        user.setUsername(uName);
+                        user.setPassword(pWord);
+                        //Add Parse USER
+                        user.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    //we are good!
+                                    Toast.makeText(getApplicationContext(), "Parse created user successfully", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Parse User exists", Toast.LENGTH_LONG).show();
+                                }
 
-                        Toast.makeText(getApplicationContext(), "Not logged in",
-                                Toast.LENGTH_LONG).show();
+                            }
+                        });
 
                     }
+
                 }
             });
+
         }
-    }
+
+
+
+
+
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
