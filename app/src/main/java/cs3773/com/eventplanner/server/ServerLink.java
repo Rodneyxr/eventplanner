@@ -62,7 +62,16 @@ public enum ServerLink {
      * $targetAudience
      * $teamList
      */
-    CREATE_EVENT("https://rodneyxr.com/ep/ep_create_events.php");
+    CREATE_EVENT("https://rodneyxr.com/ep/ep_create_event.php"),
+
+    /**
+     * Gets the event information in the database
+     * <p/>
+     *
+     */
+
+    GET_EVENT("https://rodneyxr.com/ep/ep_get_events.php");
+
     String url;
 
     ServerLink(String url) {
