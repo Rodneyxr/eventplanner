@@ -12,8 +12,8 @@ import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
 
 public class CreateEventActivity extends BaseActivity {
-   //components
-     private EditText mEditTextEvntNm;
+    //components
+    private EditText mEditTextEvntNm;
     private EditText mEditTextEvntDesrptn;
     private EditText mEditTextEvntLctn;
     private EditText mEditTextEvntTim;
@@ -21,7 +21,7 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntTm;
     private EditText mEditTextEvntHst;
     private EditText mEditTextEvntAduinc;
-//data
+    //data
     private String EvntNm;
     private String EvntDesrptn;
     private String EvntLctn;
@@ -30,10 +30,10 @@ public class CreateEventActivity extends BaseActivity {
     private String EvntTm;
     private String EvntHst;
     private String EvntAduinc;
-//event
+    //event
     private CreateEventTask mCreateEventTask;
 
-//app
+    //app
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ public class CreateEventActivity extends BaseActivity {
         });
 
     }
+
     public void getNewEvntInfo() {
         EvntNm = mEditTextEvntNm.getText().toString();
         EvntDesrptn = mEditTextEvntDesrptn.getText().toString();
@@ -68,9 +69,6 @@ public class CreateEventActivity extends BaseActivity {
         EvntHst = mEditTextEvntHst.getText().toString();
         EvntAduinc = mEditTextEvntAduinc.getText().toString();
         EvntTm = mEditTextEvntTm.getText().toString();
-
-
-
     }
 
     public void createTeam() {
@@ -116,7 +114,7 @@ public class CreateEventActivity extends BaseActivity {
         }
 
         mCreateEventTask = new CreateEventTask();
-        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc );
+        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc);
 
     }
 
@@ -128,18 +126,16 @@ public class CreateEventActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            //TO-DO Create_EVENT
-            ServerRequest request = new ServerRequest(ServerLink.CREATE_ACCOUNT);
+            ServerRequest request = new ServerRequest(ServerLink.CREATE_EVENT);
 
-            //request.put("username", username)
             request.put("event_name", EvntNm);
-            request.put("event_description", EvntDesrptn);
-            request.put("event_location", EvntLctn);
-            request.put("event_time", EvntTim);
-            request.put("event_date", EvntDt);
-            request.put("event_host", EvntHst);
-            request.put("event_audience", EvntAduinc);
-            request.put("event_teams", EvntTm);
+            request.put("date", EvntDt);
+            request.put("time", EvntTim);
+            request.put("location", EvntLctn);
+            request.put("description", EvntDesrptn);
+            request.put("target_audience", EvntAduinc);
+//            request.put("event_host", EvntHst);
+            request.put("team_list", EvntTm);
 
             try {
                 request.send();
@@ -153,40 +149,41 @@ public class CreateEventActivity extends BaseActivity {
 
             return result;
         }
+
         @Override
         protected void onPostExecute(final String result) {
             mCreateEventTask = null;
 
             if (result.equals("")) {
                 showDialog("Created Event", "Your event has been created!");
-                mEditTextEvntNm.setText("");;
-                mEditTextEvntDesrptn.setText("");;
-                mEditTextEvntLctn.setText("");;
-                mEditTextEvntTim.setText("");;
-                mEditTextEvntDt.setText("");;
-                mEditTextEvntHst.setText("");;
-                mEditTextEvntAduinc.setText("");;
-                mEditTextEvntDesrptn.setText("");;
-                mEditTextEvntTm.setText("");;
+                mEditTextEvntNm.setText("");
+                mEditTextEvntDt.setText("");
+                mEditTextEvntTim.setText("");
+                mEditTextEvntLctn.setText("");
+                mEditTextEvntDesrptn.setText("");
+                mEditTextEvntAduinc.setText("");
+                mEditTextEvntTm.setText("");
+
+                mEditTextEvntHst.setText("");
                 mEditTextEvntNm.requestFocus();
 
             }
             //not sure what key is and if it is even needed.
-            else if (result.contains("Duplicate entry") && result.contains("for key 'event'"))
-            {
+            else if (result.contains("Duplicate entry") && result.contains("for key 'event'")) {
                 errorDialog("That event name already exists.");
                 mEditTextEvntNm.requestFocus();
                 mEditTextEvntNm.selectAll();
-            }
-            else {
+            } else {
                 errorDialog("Unable to create event.");
             }
         }
+
         @Override
         protected void onCancelled() {
             mCreateEventTask = null;
         }
     }
+
     @Override
     protected int getSelfNavDrawerItem() {
         return NAVDRAWER_ITEM_EVENT_CREATE;

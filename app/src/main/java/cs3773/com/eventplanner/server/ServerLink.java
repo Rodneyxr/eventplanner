@@ -15,7 +15,7 @@ public enum ServerLink {
     GET_ACCOUNT("https://rodneyxr.com/ep/ep_get_account.php"),
 
     /**
-     * Create's and adds a user in the database given the user's account information
+     * Creates and adds a user in the database given the user's account information
      * <p/>
      * $username
      * $password
@@ -54,23 +54,28 @@ public enum ServerLink {
     /**
      * Creates the event information in the database
      * <p/>
-     * $eventName
+     * $event_name
      * $date
      * $time
      * $location
      * $description
-     * $targetAudience
-     * $teamList
+     * $target_audience
+     * $team_list
      */
     CREATE_EVENT("https://rodneyxr.com/ep/ep_create_event.php"),
 
     /**
-     * Gets the event information in the database
+     * Gets all events in the database
      * <p/>
-     *
      */
+    GET_EVENTS("https://rodneyxr.com/ep/ep_get_events.php"),
 
-    GET_EVENT("https://rodneyxr.com/ep/ep_get_events.php");
+    /**
+     * Deletes a team given the team_name
+     * <p/>
+     * $team_name
+     */
+    DELETE_TEAM("https://rodneyxr.com/ep/ep_delete_team.php");
 
     String url;
 

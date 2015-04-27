@@ -36,6 +36,10 @@ public final class Tools {
         return Base64.encodeToString(bytes, Base64.URL_SAFE);
     }
 
+    /**
+     * @param o - serializable object to serialize
+     * @return serialized data in bytes represented by a base64 string
+     */
     public static String blobify(Serializable o) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutput out = null;
@@ -59,6 +63,10 @@ public final class Tools {
         return Tools.easyBase64(bytes);
     }
 
+    /**
+     * @param blob - Base 64 string representation of a serialized object
+     * @return the object that was represented by the blob
+     */
     public static Object deblobify(String blob) {
         byte[] bytes = Base64.decode(blob, Base64.URL_SAFE);
         ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
