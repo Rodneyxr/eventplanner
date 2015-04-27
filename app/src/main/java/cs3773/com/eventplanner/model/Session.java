@@ -17,11 +17,12 @@ import cs3773.com.eventplanner.server.ServerRequestException;
 public class Session {
 
     private static Account account;
+    private static Event event;
 
     /**
      * @param username the employee's username
      * @param password the employee's hashed password
-     * @return true if the account is successfully created
+     * @return true if the account is successfully set
      */
     public static boolean setAccount(String username, String password) {
         try {
@@ -62,5 +63,4 @@ public class Session {
     public static Account getAccount() {
         return account;
     }
-
 }
