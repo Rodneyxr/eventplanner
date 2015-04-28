@@ -1,13 +1,11 @@
 package cs3773.com.eventplanner.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.EditText;
-
+import java.util.Date;
 import cs3773.com.eventplanner.R;
-
+import cs3773.com.eventplanner.model.Account;
+import cs3773.com.eventplanner.model.Event;
 public class ViewEventActivity extends BaseActivity {
 
     private EditText mEditTextEventName;
@@ -15,18 +13,13 @@ public class ViewEventActivity extends BaseActivity {
     private EditText mEditTextEventLocation;
     private EditText mEditTextEventTime;
     private EditText mEditTextEventDate;
-    private EditText mEditTextEventTeam;
-    private EditText mEditTextEventHost;
+    private EditText mEditTextEventUsers;
     private EditText mEditTextEventAudience;
-    //data
-    private String eventName;
-    private String eventDescription;
-    private String eventLocation;
-    private String eventTime;
-    private String eventDate;
-    private String eventTeam;
-    private String eventHost;
-    private String eventAudience;
+
+    public static Event eventToLoad;
+    private Date date;
+    private String stringDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +29,32 @@ public class ViewEventActivity extends BaseActivity {
         mEditTextEventLocation = (EditText) findViewById(R.id.editTextEventLocation);
         mEditTextEventTime = (EditText) findViewById(R.id.editTextEventTime);
         mEditTextEventDate = (EditText) findViewById(R.id.editTextEventDate);
-        mEditTextEventTeam = (EditText) findViewById(R.id.editTextEventTeam);
-        mEditTextEventHost = (EditText) findViewById(R.id.editTextEventHost);
+        mEditTextEventUsers = (EditText) findViewById(R.id.editTextEventUsers);
         mEditTextEventAudience = (EditText) findViewById(R.id.editTextEventAudience);
     }
 
+
+    private void getUpdatedEventInfo() {
+        if(eventToLoad == null){
+            errorDialog("No event");
+            return;
+        }
+        mEditTextEventName.setText(eventToLoad.getEventName());
+        mEditTextEventDescription.setText(eventToLoad.getDescription());
+        mEditTextEventLocation.setText(eventToLoad.getLocation());
+        mEditTextEventTime.setText(eventToLoad.getTime());
+        date = eventToLoad.getDate();
+        stringDate = date.toString();
+        mEditTextEventDate.setText(stringDate);
+
+        StringBuilder sb = new StringBuilder();
+        for (Account account : eventToLoad.getAccountList()) {
+            sb.append(account.getUsername() + " ");
+        }
+        String accounts = sb.toString();
+        mEditTextEventUsers.setText(accounts);
+        mEditTextEventAudience.setText(eventToLoad.getTargetAudience());
+
+    }
 
 }

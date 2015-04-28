@@ -64,6 +64,7 @@ public class CalendarActivity extends BaseActivity {
                         for(Event event : Session.getEvents()) {
                             //eventDate = sdf.parse(testYear + "-" + testMonth + "-" + testDay);
                             if (date.compareTo(event.getDate()) == 0) {
+                                ViewEventActivity.eventToLoad = event;
                                 intent = new Intent(CalendarActivity.this, ViewEventActivity.class);
                                 startActivity(intent);
                                 finish();
