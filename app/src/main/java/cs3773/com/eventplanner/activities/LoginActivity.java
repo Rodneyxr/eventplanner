@@ -256,6 +256,7 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
+                Session.setEvents();
                 Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(menuIntent);
                 finish();

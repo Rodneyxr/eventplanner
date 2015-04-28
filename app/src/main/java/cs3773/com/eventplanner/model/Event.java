@@ -20,9 +20,10 @@ public class Event {
 
     }
 
-    public Event(String eventName, Date date, String location, String description, String targetAudience, ArrayList<Team> team) {
+    public Event(String eventName, Date date, String time, String location, String description, String targetAudience, ArrayList<Team> team) {
         this.eventName = eventName;
         this.date = date;
+        this.time = time;
         this.location = location;
         this.description = description;
         this.teamList = team;

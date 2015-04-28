@@ -3,6 +3,7 @@ package cs3773.com.eventplanner.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import cs3773.com.eventplanner.server.ServerLink;
@@ -18,6 +19,7 @@ public class Session {
 
     private static Account account;
     private static Event event;
+    private static ArrayList<Event> events;
 
     /**
      * @param username the employee's username
@@ -62,5 +64,13 @@ public class Session {
 
     public static Account getAccount() {
         return account;
+    }
+
+    public static void setEvents(){
+        events = Database.getEvents();
+    }
+
+    public static ArrayList<Event> getEvents(){
+        return events;
     }
 }
