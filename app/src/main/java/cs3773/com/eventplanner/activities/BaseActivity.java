@@ -142,6 +142,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (mActionBarToolbar != null) {
+            if (selfItem != NAVDRAWER_ITEM_INVALID)
+                mActionBarToolbar.setTitle(NAVDRAWER_TITLE_RES_ID[selfItem]);
             mActionBarToolbar.setNavigationIcon(R.drawable.ic_drawer);
             mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
