@@ -124,15 +124,14 @@ public abstract class BaseActivity extends ActionBarActivity {
         // What nav drawer item should be selected?
         int selfItem = getSelfNavDrawerItem();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout); // FIXME: this is always null
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (mDrawerLayout == null) {
-            System.out.println("******************** mdrawerlayout is null");
             return;
         }
+
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.background_material_light));
         ScrollView navDrawer = (ScrollView) mDrawerLayout.findViewById(R.id.navdrawer);
         if (selfItem == NAVDRAWER_ITEM_INVALID) {
-            System.out.println("************************do not show navbar");
             // do not show a nav drawer
             if (navDrawer != null) {
                 ((ViewGroup) navDrawer.getParent()).removeView(navDrawer);
@@ -140,10 +139,9 @@ public abstract class BaseActivity extends ActionBarActivity {
             mDrawerLayout = null;
             return;
         }
-        System.out.println("*************************show navbar");
 
+        mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (mActionBarToolbar != null) {
-            System.out.println("*********************** action toolbar is not null");
             mActionBarToolbar.setNavigationIcon(R.drawable.ic_drawer);
             mActionBarToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
@@ -151,8 +149,6 @@ public abstract class BaseActivity extends ActionBarActivity {
                     mDrawerLayout.openDrawer(Gravity.START);
                 }
             });
-        } else {
-            System.out.println("***********************action toolbar is null");
         }
 
         mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
