@@ -93,6 +93,7 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
         if (EvntDt.isEmpty()) {
+
             errorDialog("Event Date cannot be empty.");
             mEditTextEvntDt.requestFocus();
             return;

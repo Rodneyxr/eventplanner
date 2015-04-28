@@ -57,7 +57,7 @@ public class Database {
                 event.setTime(page.getString("time"));
                 event.setLocation(page.getString("location"));
                 event.setDescription(page.getString("description"));
-//                event.setTeamList();
+//                event.setAccountList();
                 eventsList.add(event);
             }
 

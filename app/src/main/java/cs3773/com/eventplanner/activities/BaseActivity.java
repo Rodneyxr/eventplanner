@@ -42,19 +42,17 @@ public abstract class BaseActivity extends ActionBarActivity {
     // it's a list of all possible items.
     protected static final int NAVDRAWER_ITEM_INVALID = -1;
     protected static final int NAVDRAWER_ITEM_CALENDAR = 0;
-    protected static final int NAVDRAWER_ITEM_EVENT = 1;
-    protected static final int NAVDRAWER_ITEM_CHAT = 2;
-    protected static final int NAVDRAWER_ITEM_ACCOUNT_INFO = 3;
-    protected static final int NAVDRAWER_ITEM_ACCOUNT_CREATE = 4;
-    protected static final int NAVDRAWER_ITEM_TEAM_CREATE = 5;
-    protected static final int NAVDRAWER_ITEM_EVENT_CREATE = 6;
-    protected static final int NAVDRAWER_ITEM_LOGOUT = 7;
+    protected static final int NAVDRAWER_ITEM_CHAT = 1;
+    protected static final int NAVDRAWER_ITEM_ACCOUNT_INFO = 2;
+    protected static final int NAVDRAWER_ITEM_ACCOUNT_CREATE = 3;
+    protected static final int NAVDRAWER_ITEM_TEAM_CREATE = 4;
+    protected static final int NAVDRAWER_ITEM_EVENT_CREATE = 5;
+    protected static final int NAVDRAWER_ITEM_LOGOUT = 6;
 
 
     // titles for navdrawer items (indices must correspond to the above)
     private static final int[] NAVDRAWER_TITLE_RES_ID = new int[]{
             R.string.navdrawer_item_calendar,
-            R.string.navdrawer_item_event,
             R.string.navdrawer_item_chat,
             R.string.navdrawer_item_account_info,
             R.string.navdrawer_create_account,
@@ -67,12 +65,11 @@ public abstract class BaseActivity extends ActionBarActivity {
     // icons for navdrawer items (indices must correspond to above array)
     private static final int[] NAVDRAWER_ICON_RES_ID = new int[]{
             R.drawable.ic_drawer_calendar,  // calendar
-            R.drawable.ic_drawer_event,  // event
             R.drawable.ic_drawer_chat, // chat
             R.drawable.ic_drawer_account_info, // account info
             R.drawable.ic_drawer, // create account
             R.drawable.ic_drawer, // create team
-            R.drawable.ic_drawer, // create event
+            R.drawable.ic_drawer_event, // create event
             R.drawable.ic_drawer, // logout
     };
 
@@ -213,7 +210,6 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         // always shown
         mNavDrawerItems.add(NAVDRAWER_ITEM_CALENDAR);
-        mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_CHAT);
         mNavDrawerItems.add(NAVDRAWER_ITEM_ACCOUNT_INFO);
 
@@ -227,8 +223,6 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         mNavDrawerItems.add(NAVDRAWER_ITEM_LOGOUT);
 
-//        if (Session.getAccount().getRole() == Role.event_manager)
-//            mNavDrawerItems.add(NAVDRAWER_ITEM_EVENT_CREATE);
         createNavDrawerItems();
     }
 
@@ -283,11 +277,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         switch (item) {
             case NAVDRAWER_ITEM_CALENDAR:
                 intent = new Intent(this, CalendarActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case NAVDRAWER_ITEM_EVENT:
-                intent = new Intent(this, EventActivity.class);
                 startActivity(intent);
                 finish();
                 break;

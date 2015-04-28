@@ -100,20 +100,20 @@ public class CreateAccountActivity extends BaseActivity {
             errorDialog("Password must contain at least 1 character and at least 1 number.");
             mEditTextPassword.requestFocus();
             return;
-        } else if (password != validatePassword) {
-            errorDialog("Passwords don't match. Retry!");
-            mEditTextValidatePassword.requestFocus();
-            return;
         }
-
-        // TODO: check if the confirmation password equals the original
-//        if (password != confirmationPassword) {
-//            errorDialog("Passwords do not match.");
-//            mEditTextPassword.setText("");
-//            mEditTextConfirmationPassword.setText("");
-//            mEditTextPassword.requestFocus();
+//        else if (!password.equals(validatePassword)) {
+//            errorDialog("Passwords don't match. Retry!");
+//            mEditTextValidatePassword.requestFocus();
 //            return;
 //        }
+
+        if (!password.equals(validatePassword)) {
+            errorDialog("Passwords do not match.");
+            mEditTextPassword.setText("");
+            mEditTextValidatePassword.setText("");
+            mEditTextPassword.requestFocus();
+            return;
+        }
 
         mCreateAccountTask = new CreateAccountTask();
         mCreateAccountTask.execute(username, password);

@@ -7,8 +7,11 @@ import android.test.ApplicationTestCase;
 import java.util.ArrayList;
 
 import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.model.Account;
 import cs3773.com.eventplanner.model.Database;
+import cs3773.com.eventplanner.model.EmployeeAccount;
 import cs3773.com.eventplanner.model.Event;
+import cs3773.com.eventplanner.model.Role;
 import cs3773.com.eventplanner.model.Team;
 
 /**
@@ -54,13 +57,21 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         testTeam2.setGeneralMember("generalmember2");
         testTeam2.setTeamSupervisor("supervisor2");
 
-        event.addTeam(testTeam1);
-        event.addTeam(testTeam2);
+        Account account1 = new EmployeeAccount();
+        account1.setFullName("Test account 1");
+        account1.setRole(Role.employee);
 
-        String blob = Tools.blobify(event.getTeamList());
-        System.out.println("APP_TEST: " + blob);
-        ArrayList<Team> teamFromBlob = (ArrayList<Team>) Tools.deblobify(blob);
-        System.out.println("APP_TEST: " + teamFromBlob.get(0).getTeamName());
+        Account account2 = new EmployeeAccount();
+        account2.setFullName("Test account 2");
+        account2.setRole(Role.event_manager);
+
+        event.addTeam(account1);
+        event.addTeam(account2);
+
+        String blob = Tools.blobify(event.getAccountList());
+        System.out.println(blob);
+        ArrayList<Account> accountsFromBlob = (ArrayList<Account>) Tools.deblobify(blob);
+        System.out.println(accountsFromBlob.get(0).getFullName());
     }
 
 }

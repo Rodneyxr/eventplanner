@@ -14,19 +14,18 @@ public class Event {
     private String location;
     private String description;
     private String targetAudience;
-    private ArrayList<Team> teamList = new ArrayList<Team>();
+    private ArrayList<Account> accountList = new ArrayList<Account>();
 
     public Event() {
-
     }
 
-    public Event(String eventName, Date date, String time, String location, String description, String targetAudience, ArrayList<Team> team) {
+    public Event(String eventName, Date date, String time, String location, String description, String targetAudience, ArrayList<Account> team) {
         this.eventName = eventName;
         this.date = date;
         this.time = time;
         this.location = location;
         this.description = description;
-        this.teamList = team;
+        this.accountList = team;
     }
 
     public String getEventName() {
@@ -77,20 +76,20 @@ public class Event {
         this.targetAudience = targetAudience;
     }
 
-    public void addTeam(Team team) {
-        teamList.add(team);
+    public void addTeam(Account account) {
+        accountList.add(account);
     }
 
-    public void removeTeam(Team team) {
-        teamList.remove(team);
+    public void removeTeam(Account account) {
+        accountList.remove(account);
     }
 
-    public ArrayList<Team> getTeamList() {
-        return teamList;
+    public ArrayList<Account> getAccountList() {
+        return accountList;
     }
 
-    public void setTeamList(ArrayList<Team> teamList) {
-        this.teamList = teamList;
+    public void setAccountList(ArrayList<Account> accountList) {
+        this.accountList = accountList;
     }
 
     @Override
