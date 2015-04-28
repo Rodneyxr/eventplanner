@@ -91,5 +91,10 @@ public class Event {
     public void setTeamList(ArrayList<Team> teamList) {
         this.teamList = teamList;
     }
+
+    @Override
+    public String toString() {
+        return getEventName();
+    }
 }
 

@@ -1,11 +1,13 @@
 package cs3773.com.eventplanner;
 
 import android.app.Application;
+import android.os.StrictMode;
 import android.test.ApplicationTestCase;
 
 import java.util.ArrayList;
 
 import cs3773.com.eventplanner.controller.Tools;
+import cs3773.com.eventplanner.model.Database;
 import cs3773.com.eventplanner.model.Event;
 import cs3773.com.eventplanner.model.Team;
 
@@ -15,7 +17,20 @@ import cs3773.com.eventplanner.model.Team;
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
+
+        // use this to send server requests on main thread
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         Test_Serialization();
+        Test_GetEvents();
+    }
+
+    public void Test_GetEvents() {
+        System.out.println("getting events...");
+        ArrayList<Event> events = Database.getEvents();
+        for (Event event : events)
+            System.out.println(event);
     }
 
     public void Test_Serialization() {
@@ -47,6 +62,5 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         ArrayList<Team> teamFromBlob = (ArrayList<Team>) Tools.deblobify(blob);
         System.out.println("APP_TEST: " + teamFromBlob.get(0).getTeamName());
     }
-
 
 }

@@ -17,19 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Random;
+
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-
-
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
-import cs3773.com.eventplanner.model.Message;
 import cs3773.com.eventplanner.model.Session;
 
 
@@ -98,44 +93,39 @@ public class LoginActivity extends Activity {
     public void parseCreateOrLogin() {
         final String uName = userName.getText().toString();
         final String pWord = password.getText().toString();
-            ParseUser.logInInBackground(uName, pWord, new LogInCallback() {
-                @Override
-                public void done(ParseUser parseUser, ParseException e) {
-                    if (e == null) {
+        ParseUser.logInInBackground(uName, pWord, new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                if (e == null) {
 
-                        Toast.makeText(getApplicationContext(), "Login Successfully!"
-                                , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Login Successfully!"
+                            , Toast.LENGTH_LONG).show();
 
-                    } else {
-                        //CREATE PARSE USER
-                        ParseUser user = new ParseUser();
-                        user.setUsername(uName);
-                        user.setPassword(pWord);
-                        //Add Parse USER
-                        user.signUpInBackground(new SignUpCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    //we are good!
-                                    Toast.makeText(getApplicationContext(), "Parse created user successfully", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Parse User exists", Toast.LENGTH_LONG).show();
-                                }
-
+                } else {
+                    //CREATE PARSE USER
+                    ParseUser user = new ParseUser();
+                    user.setUsername(uName);
+                    user.setPassword(pWord);
+                    //Add Parse USER
+                    user.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                //we are good!
+                                Toast.makeText(getApplicationContext(), "Parse created user successfully", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Parse User exists", Toast.LENGTH_LONG).show();
                             }
-                        });
 
-                    }
+                        }
+                    });
 
                 }
-            });
 
-        }
+            }
+        });
 
-
-
-
-
+    }
 
 
     /**
