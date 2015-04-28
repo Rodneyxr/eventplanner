@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,7 +32,7 @@ import cs3773.com.eventplanner.model.Session;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -49,12 +50,10 @@ public class LoginActivity extends Activity {
     private View mProgressView;
     private View mLoginFormView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
