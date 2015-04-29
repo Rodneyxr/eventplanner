@@ -133,35 +133,16 @@
             android:layout_below="@+id/textViewEvntTim"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Host"
-            android:id="@+id/textViewEvntHst"
-            android:layout_below="@+id/editTextEvntTim"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/editTextEvntHst"
-            android:layout_below="@+id/textViewEvntHst"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
+            <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Event Audience"
             android:id="@+id/textViewEvntAduinc"
-            android:layout_below="@+id/editTextEvntHst"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editTextEvntTim" />
 
         <EditText
             android:layout_width="match_parent"

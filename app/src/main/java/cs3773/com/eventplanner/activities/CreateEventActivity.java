@@ -26,7 +26,6 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntTim;
     private EditText mEditTextEvntDt;
     private EditText mEditTextEvntTm;
-    private EditText mEditTextEvntHst;
     private EditText mEditTextEvntAduinc;
     //data
     private String eventName;
@@ -35,7 +34,6 @@ public class CreateEventActivity extends BaseActivity {
     private String eventTime;
     private String eventDate;
     private String eventAccountList;
-    private String EvntHst;
     private String eventAudience;
     private Date date;
     //event
@@ -53,7 +51,6 @@ public class CreateEventActivity extends BaseActivity {
         mEditTextEvntTim = (EditText) findViewById(R.id.editTextEvntTim);
         mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
         mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
-        mEditTextEvntHst = (EditText) findViewById(R.id.editTextEvntHst);
         mEditTextEvntAduinc = (EditText) findViewById(R.id.editTextEvntAduinc);
         mEditTextEvntTm = (EditText) findViewById(R.id.editTextEvntTm);
 
@@ -74,7 +71,6 @@ public class CreateEventActivity extends BaseActivity {
         eventLocation = mEditTextEvntLctn.getText().toString();
         eventTime = mEditTextEvntTim.getText().toString();
         eventDate = mEditTextEvntDt.getText().toString();
-        EvntHst = mEditTextEvntHst.getText().toString();
         eventAudience = mEditTextEvntAduinc.getText().toString();
         eventAccountList = mEditTextEvntTm.getText().toString();
     }
@@ -116,12 +112,6 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
 
-        if (EvntHst.isEmpty()) {
-            errorDialog("Event host cannot be empty.");
-            mEditTextEvntHst.requestFocus();
-            return;
-        }
-
         if (eventAudience.isEmpty()) {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
@@ -135,7 +125,7 @@ public class CreateEventActivity extends BaseActivity {
         }
 
         mCreateEventTask = new CreateEventTask();
-        mCreateEventTask.execute(eventName, eventDescription, eventLocation, eventTime, eventDate, eventAccountList, EvntHst, eventAudience);
+        mCreateEventTask.execute(eventName, eventDescription, eventLocation, eventTime, eventDate, eventAccountList, eventAudience);
 
     }
 
@@ -155,7 +145,6 @@ public class CreateEventActivity extends BaseActivity {
             request.put("location", eventLocation);
             request.put("description", eventDescription);
             request.put("target_audience", eventAudience);
-//            request.put("event_host", EvntHst);
             request.put("team_list", eventAccountList);
 
             try {
@@ -196,8 +185,6 @@ public class CreateEventActivity extends BaseActivity {
                 mEditTextEvntDesrptn.setText("");
                 mEditTextEvntAduinc.setText("");
                 mEditTextEvntTm.setText("");
-
-                mEditTextEvntHst.setText("");
                 mEditTextEvntNm.requestFocus();
             }
             //not sure what key is and if it is even needed.
