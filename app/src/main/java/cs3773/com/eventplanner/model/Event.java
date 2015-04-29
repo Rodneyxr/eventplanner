@@ -14,6 +14,7 @@ public class Event {
     private String location;
     private String description;
     private String targetAudience;
+    private ArrayList<TimeSlot> schedule = new ArrayList<>();
     private ArrayList<String> accountList = new ArrayList<String>();
 
     public Event() {
@@ -76,7 +77,7 @@ public class Event {
         this.targetAudience = targetAudience;
     }
 
-    public void addTeam(String account) {
+    public void addAccount(String account) {
         accountList.add(account);
     }
 
@@ -90,6 +91,24 @@ public class Event {
 
     public void setAccountList(ArrayList<String> accountList) {
         this.accountList = accountList;
+    }
+
+    public ArrayList<TimeSlot> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ArrayList<TimeSlot> schedule) {
+        this.schedule = schedule;
+    }
+
+    public void addTimeSlot(TimeSlot timeSlot) {
+        if (timeSlot != null)
+            schedule.add(timeSlot);
+    }
+
+    public void removeTimeSlot(TimeSlot timeSlot) {
+        if (timeSlot != null)
+            schedule.remove(timeSlot);
     }
 
     @Override
