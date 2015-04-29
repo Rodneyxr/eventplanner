@@ -5,29 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import java.util.Calendar;
 import android.content.Context;
 import android.content.Intent;
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
-import android.app.TimePickerDialog;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 
 
 public class CreateEventActivity extends BaseActivity  {
+
     //components
     private EditText mEditTextEvntNm;
     private EditText mEditTextEvntDesrptn;
@@ -35,27 +26,17 @@ public class CreateEventActivity extends BaseActivity  {
     private EditText mEditTextEvntTim;
     private EditText mEditTextEvntDt;
     private EditText mEditTextEvntTm;
-    private EditText mEditTextEvntHst;
     private EditText mEditTextEvntAduinc;
-    private TextView txtTime;
-    public Button btnTimePicker;
     final Context context = this;
     public Button button;
-    public EditText result;
 
     //data
-
-
-    // Variable for storing current time
-    public int  mHour, mMinute;
-
     private String EvntNm;
     private String EvntDesrptn;
     private String EvntLctn;
     private String EvntTim;
     private String EvntDt;
     private String EvntTm;
-    private String EvntHst;
     private String EvntAduinc;
     //event
     private CreateEventTask mCreateEventTask;
@@ -68,9 +49,7 @@ public class CreateEventActivity extends BaseActivity  {
 
         // components from xml
         button = (Button) findViewById(R.id.buttonPrompt);
-        result = (EditText) findViewById(R.id.editTextResult);
 
-        txtTime = (EditText) findViewById(R.id.txtTime);
 
         mEditTextEvntNm = (EditText) findViewById(R.id.editTextEvntNm);
         mEditTextEvntDesrptn = (EditText) findViewById(R.id.editTextEvntDesrptn);
@@ -80,10 +59,8 @@ public class CreateEventActivity extends BaseActivity  {
         mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
         mEditTextEvntAduinc = (EditText) findViewById(R.id.editTextEvntAduinc);
         mEditTextEvntTm = (EditText) findViewById(R.id.editTextEvntTm);
-        btnTimePicker = (Button) findViewById(R.id.btnTimePicker);
         Button button = (Button) findViewById(R.id.buttonPrompt);
 
-        Button mTimePickerButton = (Button) findViewById(R.id.btnTimePicker);
 
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -99,6 +76,7 @@ public class CreateEventActivity extends BaseActivity  {
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+                final EditText userInput2 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput2);
 
 
                 // set dialog message
@@ -107,12 +85,13 @@ public class CreateEventActivity extends BaseActivity  {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
+                                        // get user input and set it
                                         // edit text
-                                       // result.setText(userInput.getText());
-                                        String Description = userInput.getText().toString();
+                                        String Description = userInput2.getText().toString();
+                                        String Time = userInput.getText().toString();
                                         Intent intent = new Intent(CreateEventActivity.this, Schedule.class);
                                         intent.putExtra("Description", Description);
+                                        intent.putExtra("Time", Time);
                                         startActivity(intent);
                                     }
                                 })
@@ -129,15 +108,6 @@ public class CreateEventActivity extends BaseActivity  {
                 // show it
                 alertDialog.show();
 
-            }
-
-        });
-
-
-        mTimePickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimePicker();
             }
 
         });
@@ -161,40 +131,9 @@ public class CreateEventActivity extends BaseActivity  {
         EvntLctn = mEditTextEvntLctn.getText().toString();
         EvntTim = mEditTextEvntTim.getText().toString();
         EvntDt = mEditTextEvntDt.getText().toString();
-        EvntHst = mEditTextEvntHst.getText().toString();
         EvntAduinc = mEditTextEvntAduinc.getText().toString();
         EvntTm = mEditTextEvntTm.getText().toString();
     }
-
-    public void TimePicker() {
-
-            // Process to get Current Time
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
-
-            // Launch Time Picker Dialog
-            TimePickerDialog tpd = new TimePickerDialog(this,
-                    new TimePickerDialog.OnTimeSetListener() {
-
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay,
-                                              int minute) {
-                            // Display Selected time in textbox
-                            //TODO Add final so not visible in create event (edittext)
-                             txtTime.setText(hourOfDay + ":" + minute);
-                            String Times = txtTime.getText().toString();
-                            Intent intent = new Intent(CreateEventActivity.this, Schedule.class);
-                            intent.putExtra("Times", Times);
-                            startActivity(intent);
-                        }
-                    }, mHour, mMinute, false);
-            tpd.show();
-        }
-
-
-
-
 
         public void createTeam() {
         if (EvntNm.isEmpty()) {
@@ -223,11 +162,6 @@ public class CreateEventActivity extends BaseActivity  {
             mEditTextEvntDt.requestFocus();
             return;
         }
-        if (EvntHst.isEmpty()) {
-            errorDialog("Event host cannot be empty.");
-            mEditTextEvntHst.requestFocus();
-            return;
-        }
         if (EvntAduinc.isEmpty()) {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
@@ -240,7 +174,7 @@ public class CreateEventActivity extends BaseActivity  {
         }
 
         mCreateEventTask = new CreateEventTask();
-        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc);
+        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntAduinc);
 
     }
 
@@ -289,8 +223,6 @@ public class CreateEventActivity extends BaseActivity  {
                 mEditTextEvntDesrptn.setText("");
                 mEditTextEvntAduinc.setText("");
                 mEditTextEvntTm.setText("");
-
-                mEditTextEvntHst.setText("");
                 mEditTextEvntNm.requestFocus();
 
             }

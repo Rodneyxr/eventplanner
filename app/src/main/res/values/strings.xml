@@ -48,6 +48,7 @@
     <string name="title_activity_create_event">CreateEventActivity</string>
     <string name="title_activity_calendar_view">CalendarViewActivity</string>
     <string name="title_activity_view_event">ViewEventActivity</string>
+    <string name="title_activity_schedule">Schedule</string>
 
 
 </resources>

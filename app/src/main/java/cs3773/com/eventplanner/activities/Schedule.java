@@ -15,10 +15,10 @@ public class Schedule extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
         Bundle bundle = getIntent().getExtras();
-        String Times = bundle.getString("Times");
-        TextView txtView = (TextView) findViewById(R.id.TimeTV);
-        txtView.setText(Times);
+        String Time = bundle.getString("Time");
         String Description = bundle.getString("Description");
+        TextView txtView = (TextView) findViewById(R.id.TimeTV);
+        txtView.setText(Time);
         TextView txtView2 = (TextView) findViewById(R.id.DescriptionTV);
         txtView2.setText(Description);
     }

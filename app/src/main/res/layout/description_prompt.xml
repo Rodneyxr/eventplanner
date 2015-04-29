@@ -10,11 +10,22 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type Schedule Description : "
+        android:text="Schedule : "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/editTextDialogUserInput"
+        android:layout_width="match_parent"
+        android:hint="Time"
+        android:inputType="time"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput2"
+        android:hint="Task Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
