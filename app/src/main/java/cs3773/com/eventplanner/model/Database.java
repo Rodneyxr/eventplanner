@@ -23,7 +23,6 @@ import cs3773.com.eventplanner.server.ServerRequestException;
 public class Database {
 
     public static ArrayList<Event> getEvents() {
-
         ArrayList<Event> eventsList = new ArrayList<Event>();
         try {
             ServerRequest request = new ServerRequest(ServerLink.GET_EVENTS);
@@ -68,6 +67,35 @@ public class Database {
             return null;
         }
         return eventsList;
+    }
+
+    public static ArrayList<String> getAccountNames() {
+        ArrayList<String> accountList = new ArrayList<>();
+        try {
+            ServerRequest request = new ServerRequest(ServerLink.GET_ACCOUNT_NAMES);
+            request.send();
+
+            String result = request.getResponse();
+            if (result.equals("false")) {
+                return null;
+            }
+
+            // parse the result
+            JSONArray pages = new JSONArray(result);
+            for (int i = 0; i < pages.length(); i++) {
+                JSONObject page = pages.getJSONObject(i);
+                String name = page.getString("username");
+                accountList.add(name);
+            }
+
+        } catch (ServerRequestException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (JSONException je) {
+            je.printStackTrace();
+            return null;
+        }
+        return accountList;
     }
 
 }

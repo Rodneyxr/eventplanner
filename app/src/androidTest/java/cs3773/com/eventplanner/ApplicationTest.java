@@ -25,8 +25,9 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Test_Serialization();
-        Test_GetEvents();
+//        Test_Serialization();
+//        Test_GetEvents();
+        TestGetAccountNames();
     }
 
     public void Test_GetEvents() {
@@ -58,20 +59,26 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         testTeam2.setTeamSupervisor("supervisor2");
 
         Account account1 = new EmployeeAccount();
-        account1.setFullName("Test account 1");
+        account1.setUsername("Test account 1");
         account1.setRole(Role.employee);
 
         Account account2 = new EmployeeAccount();
-        account2.setFullName("Test account 2");
+        account2.setUsername("Test account 2");
         account2.setRole(Role.event_manager);
 
-        event.addTeam(account1);
-        event.addTeam(account2);
+        event.addAccount(account1.getUsername());
+        event.addAccount(account2.getUsername());
 
         String blob = Tools.blobify(event.getAccountList());
         System.out.println(blob);
         ArrayList<Account> accountsFromBlob = (ArrayList<Account>) Tools.deblobify(blob);
         System.out.println(accountsFromBlob.get(0).getFullName());
+    }
+
+    public void TestGetAccountNames() {
+        System.out.println("Getting Account names...");
+        ArrayList<String> accountList = Database.getAccountNames();
+        System.out.println(accountList);
     }
 
 }
