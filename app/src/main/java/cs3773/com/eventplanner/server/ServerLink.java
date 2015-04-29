@@ -65,6 +65,12 @@ public enum ServerLink {
     CREATE_EVENT("https://rodneyxr.com/ep/ep_create_event.php"),
 
     /**
+     * Gets all account names in the database
+     * <p/>
+     */
+    GET_ACCOUNT_NAMES("https://rodneyxr.com/ep/ep_get_account_names.php"),
+
+    /**
      * Gets all events in the database
      * <p/>
      */
