@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
@@ -92,29 +96,51 @@ public class CreateEventActivity extends BaseActivity {
             mEditTextEvntTim.requestFocus();
             return;
         }
-        if (EvntDt.isEmpty()) {
 
+        if (EvntDt.isEmpty()) {
             errorDialog("Event Date cannot be empty.");
             mEditTextEvntDt.requestFocus();
             return;
         }
-        if (EvntHst.isEmpty()) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // set the date
+        Date date;
+        try {
+            date = sdf.parse(EvntDt);
+        } catch (ParseException pe) {
+            errorDialog("Event Date should be in the format: 'yyyy-MM-dd'");
+            return;
+        }
+
+        if (EvntHst.isEmpty())
+
+        {
             errorDialog("Event host cannot be empty.");
             mEditTextEvntHst.requestFocus();
             return;
         }
-        if (EvntAduinc.isEmpty()) {
+
+        if (EvntAduinc.isEmpty())
+
+        {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
             return;
         }
-        if (EvntTm.isEmpty()) {
+
+        if (EvntTm.isEmpty())
+
+        {
             errorDialog("Event team[s] cannot be empty.");
             mEditTextEvntTm.requestFocus();
             return;
         }
 
-        mCreateEventTask = new CreateEventTask();
+        mCreateEventTask = new
+
+                CreateEventTask();
+
         mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc);
 
     }
@@ -183,6 +209,7 @@ public class CreateEventActivity extends BaseActivity {
         protected void onCancelled() {
             mCreateEventTask = null;
         }
+
     }
 
     @Override

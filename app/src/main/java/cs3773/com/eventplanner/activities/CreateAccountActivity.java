@@ -101,11 +101,6 @@ public class CreateAccountActivity extends BaseActivity {
             mEditTextPassword.requestFocus();
             return;
         }
-//        else if (!password.equals(validatePassword)) {
-//            errorDialog("Passwords don't match. Retry!");
-//            mEditTextValidatePassword.requestFocus();
-//            return;
-//        }
 
         if (!password.equals(validatePassword)) {
             errorDialog("Passwords do not match.");
@@ -162,6 +157,7 @@ public class CreateAccountActivity extends BaseActivity {
                 showDialog("Created Account", "Your account has been created!");
                 mEditTextUsername.setText("");
                 mEditTextPassword.setText("");
+                mEditTextValidatePassword.setText("");
                 mSpinnerRole.setSelection(0, true);
                 mEditTextUsername.requestFocus();
             } else if (result.contains("Duplicate entry") && result.contains("for key 'username'")) {
