@@ -69,6 +69,7 @@ public class Session {
         events = Database.getEvents();
     }
 
+
     public static ArrayList<Event> getEvents() {
         return events;
     }

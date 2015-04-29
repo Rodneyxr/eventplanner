@@ -1,11 +1,22 @@
 package cs3773.com.eventplanner.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
 import java.util.Date;
+
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.controller.BackgroundTask;
 import cs3773.com.eventplanner.model.Account;
 import cs3773.com.eventplanner.model.Event;
+import cs3773.com.eventplanner.model.Session;
+import cs3773.com.eventplanner.server.ServerLink;
+import cs3773.com.eventplanner.server.ServerRequest;
+import cs3773.com.eventplanner.server.ServerRequestException;
+
 public class ViewEventActivity extends BaseActivity {
 
     private EditText mEditTextEventName;
@@ -32,11 +43,18 @@ public class ViewEventActivity extends BaseActivity {
         mEditTextEventUsers = (EditText) findViewById(R.id.editTextEventUsers);
         mEditTextEventAudience = (EditText) findViewById(R.id.editTextEventAudience);
         getUpdatedEventInfo();
+
+        Button mDeleteEventButton = (Button) findViewById(R.id.buttonDeleteEvent);
+        mDeleteEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteEvent();
+            }
+        });
     }
 
-
     private void getUpdatedEventInfo() {
-        if(eventToLoad == null){
+        if (eventToLoad == null) {
             errorDialog("No event");
             return;
         }
@@ -58,4 +76,54 @@ public class ViewEventActivity extends BaseActivity {
 
     }
 
+    public void deleteEvent() {
+        BackgroundTask bg = new BackgroundTask() {
+            @Override
+            protected Boolean doInBackground(String... params) {
+                ServerRequest request = new ServerRequest(ServerLink.DELETE_EVENT);
+                request.put("event_name", eventToLoad.getEventName());
+
+                try {
+                    request.send();
+
+                } catch (ServerRequestException sre) {
+                    System.err.println(sre.getMessage());
+                    return false;
+                }
+
+                String result = request.getResponse();
+                System.out.println("** result: " + result);
+
+                if (result.equals(""))
+                    return true;
+                return false;
+            }
+
+            @Override
+            protected void onPostExecute(final Boolean success) {
+                if (success) {
+                    Session session = new Session();
+                    session.getEvents().remove(eventToLoad);
+                    mEditTextEventName.setText("");
+                    mEditTextEventDescription.setText("");
+                    mEditTextEventLocation.setText("");
+                    mEditTextEventTime.setText("");
+                    mEditTextEventDate.setText("");
+                    mEditTextEventUsers.setText("");
+                    mEditTextEventAudience.setText("");
+                    showDialog("Deleted Event", "Your event has been deleted!");
+                } else {
+                    errorDialog("There was a problem deleting your event!");
+                }
+            }
+        };
+        bg.execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ViewEventActivity.this, CalendarActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
