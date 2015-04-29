@@ -173,7 +173,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-            <!--<Button
+           <Button
                 android:id="@+id/buttonPrompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,7 +184,6 @@
                 android:layout_below="@+id/editTextEvntTm"
                 android:layout_alignRight="@+id/textViewEvntDesrptn"
                 android:layout_alignEnd="@+id/textViewEvntDesrptn" />
-                -->
 
          <Button
              android:layout_width="wrap_content"

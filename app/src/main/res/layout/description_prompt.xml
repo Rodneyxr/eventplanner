@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:hint="Time"
         android:inputType="time"
+        android:imeOptions="actionNext"
         android:layout_height="wrap_content" >
         <requestFocus />
 
@@ -27,10 +29,117 @@
         android:id="@+id/editTextDialogUserInput2"
         android:hint="Task Description"
         android:layout_width="match_parent"
+        android:imeOptions="actionNext"
         android:layout_height="wrap_content" >
 
         <requestFocus />
 
     </EditText>
+    <EditText
+        android:id="@+id/editTextDialogUserInput3"
+        android:layout_width="match_parent"
+        android:hint="Time"
+        android:imeOptions="actionNext"
+        android:inputType="time"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput4"
+        android:hint="Task Description"
+        android:imeOptions="actionNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editTextDialogUserInput5"
+        android:layout_width="match_parent"
+        android:hint="Time"
+        android:imeOptions="actionNext"
+        android:inputType="time"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput6"
+        android:hint="Task Description"
+        android:layout_width="match_parent"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editTextDialogUserInput7"
+        android:layout_width="match_parent"
+        android:hint="Time"
+        android:inputType="time"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput8"
+        android:hint="Task Description"
+        android:imeOptions="actionNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editTextDialogUserInput9"
+        android:layout_width="match_parent"
+        android:imeOptions="actionNext"
+        android:hint="Time"
+        android:inputType="time"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput10"
+        android:hint="Task Description"
+        android:layout_width="match_parent"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+    <EditText
+        android:id="@+id/editTextDialogUserInput11"
+        android:layout_width="match_parent"
+        android:hint="Time"
+        android:inputType="time"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextDialogUserInput12"
+        android:hint="Task Description"
+        android:layout_width="match_parent"
+        android:imeOptions="actionNext"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+
+    </EditText>
+
 
 </LinearLayout>

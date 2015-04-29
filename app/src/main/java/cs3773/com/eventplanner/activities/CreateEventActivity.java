@@ -38,7 +38,7 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntTm;
     private EditText mEditTextEvntAduinc;
     final Context context = this;
-    //public Button button;
+    public Button button;
 
     //data
     private String eventName;
@@ -62,7 +62,7 @@ public class CreateEventActivity extends BaseActivity {
         setContentView(R.layout.activity_create_event);
 
         // components from xml
-       // button = (Button) findViewById(R.id.buttonPrompt);
+        button = (Button) findViewById(R.id.buttonPrompt);
 
 
         mEditTextEvntNm = (EditText) findViewById(R.id.editTextEvntNm);
@@ -73,10 +73,10 @@ public class CreateEventActivity extends BaseActivity {
         mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
         mEditTextEvntAduinc = (EditText) findViewById(R.id.editTextEvntAduinc);
         mEditTextEvntTm = (EditText) findViewById(R.id.editTextEvntTm);
-        //Button button = (Button) findViewById(R.id.buttonPrompt);
+        Button button = (Button) findViewById(R.id.buttonPrompt);
 
 
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // get prompts.xml view
@@ -91,6 +91,16 @@ public class CreateEventActivity extends BaseActivity {
 
                 final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
                 final EditText userInput2 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput2);
+                final EditText userInput3 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput3);
+                final EditText userInput4 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput4);
+                final EditText userInput5 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput5);
+                final EditText userInput6 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput6);
+                final EditText userInput7 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput7);
+                final EditText userInput8 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput8);
+                final EditText userInput9 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput9);
+                final EditText userInput10 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput10);
+                final EditText userInput11 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput11);
+                final EditText userInput12 = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput12);
 
 
                 // set dialog message
@@ -103,9 +113,29 @@ public class CreateEventActivity extends BaseActivity {
                                         // edit text
                                         String Description = userInput2.getText().toString();
                                         String Time = userInput.getText().toString();
+                                        String Description2 = userInput4.getText().toString();
+                                        String Time2 = userInput3.getText().toString();
+                                        String Description3 = userInput6.getText().toString();
+                                        String Time3 = userInput5.getText().toString();
+                                        String Description4 = userInput8.getText().toString();
+                                        String Time4 = userInput7.getText().toString();
+                                        String Description5 = userInput10.getText().toString();
+                                        String Time5 = userInput9.getText().toString();
+                                        String Description6 = userInput12.getText().toString();
+                                        String Time6 = userInput11.getText().toString();
                                         Intent intent = new Intent(CreateEventActivity.this, Schedule.class);
                                         intent.putExtra("Description", Description);
                                         intent.putExtra("Time", Time);
+                                        intent.putExtra("Description2", Description2);
+                                        intent.putExtra("Time2", Time2);
+                                        intent.putExtra("Description3", Description3);
+                                        intent.putExtra("Time3", Time3);
+                                        intent.putExtra("Description4", Description4);
+                                        intent.putExtra("Time4", Time4);
+                                        intent.putExtra("Description5", Description5);
+                                        intent.putExtra("Time5", Time5);
+                                        intent.putExtra("Description6", Description6);
+                                        intent.putExtra("Time6", Time6);
                                         startActivity(intent);
                                     }
                                 })
@@ -124,7 +154,7 @@ public class CreateEventActivity extends BaseActivity {
 
             }
 
-        }); */
+        });
 
         Button mCreateEventButton = (Button) findViewById(R.id.buttonCreateEventInfo);
         mCreateEventButton.setOnClickListener(new View.OnClickListener() {
