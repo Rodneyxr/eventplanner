@@ -67,13 +67,12 @@ public class ViewEventActivity extends BaseActivity {
         mEditTextEventDate.setText(stringDate);
 
         StringBuilder sb = new StringBuilder();
-        for (Account account : eventToLoad.getAccountList()) {
-            sb.append(account.getUsername() + " ");
+        for (String account : eventToLoad.getAccountList()) {
+            sb.append(account + ", ");
         }
         String accounts = sb.toString();
         mEditTextEventUsers.setText(accounts);
         mEditTextEventAudience.setText(eventToLoad.getTargetAudience());
-
     }
 
     public void deleteEvent() {

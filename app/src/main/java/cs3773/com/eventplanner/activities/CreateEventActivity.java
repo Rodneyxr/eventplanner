@@ -8,10 +8,13 @@ import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.model.Account;
 import cs3773.com.eventplanner.model.Event;
 import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
@@ -38,6 +41,7 @@ public class CreateEventActivity extends BaseActivity {
     private Date date;
     //event
     private CreateEventTask mCreateEventTask;
+    private ArrayList<String> teamList = new ArrayList<String>();
 
     //app
     @Override
@@ -172,7 +176,8 @@ public class CreateEventActivity extends BaseActivity {
                 event.setLocation(eventLocation);
                 event.setTargetAudience(eventAudience);
                 event.setDescription(eventDescription);
-//                event.setAccountList(eventAccountList); // TODO: enable this
+                teamList = new ArrayList<String>(Arrays.asList(eventAccountList.split("\\s*,\\s*")));
+                event.setAccountList(teamList); // TODO: enable this
 
                 // add this event to the local session
                 Session.getEvents().add(event);
