@@ -14,6 +14,7 @@ import java.util.UUID;
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.controller.Tools;
 import cs3773.com.eventplanner.model.Role;
+import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
@@ -144,7 +145,6 @@ public class CreateAccountActivity extends BaseActivity {
             }
 
             String result = request.getResponse();
-            System.out.println("** result: " + result);
 
             return result;
         }
@@ -154,6 +154,9 @@ public class CreateAccountActivity extends BaseActivity {
             mCreateAccountTask = null;
 
             if (result.equals("")) {
+                // store the username locally
+                Session.getAccountNames().add(username);
+
                 showDialog("Created Account", "Your account has been created!");
                 mEditTextUsername.setText("");
                 mEditTextPassword.setText("");

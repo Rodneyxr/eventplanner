@@ -3,12 +3,10 @@ package cs3773.com.eventplanner.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -256,6 +254,7 @@ public class LoginActivity extends BaseActivity {
 
             if (success) {
                 Session.setEvents();
+                Session.setAccountNames();
                 Intent menuIntent = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(menuIntent);
                 finish();

@@ -25,8 +25,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-//        Test_Serialization();
-//        Test_GetEvents();
+        Test_Serialization();
+        Test_GetEvents();
         TestGetAccountNames();
     }
 

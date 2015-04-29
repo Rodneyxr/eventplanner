@@ -19,6 +19,7 @@ public class Session {
 
     private static Account account;
     private static ArrayList<Event> events;
+    private static ArrayList<String> accountNames;
 
     /**
      * @param username the employee's username
@@ -69,8 +70,15 @@ public class Session {
         events = Database.getEvents();
     }
 
-
     public static ArrayList<Event> getEvents() {
         return events;
+    }
+
+    public static ArrayList<String> getAccountNames() {
+        return accountNames;
+    }
+
+    public static void setAccountNames() {
+        accountNames = Database.getAccountNames();
     }
 }
