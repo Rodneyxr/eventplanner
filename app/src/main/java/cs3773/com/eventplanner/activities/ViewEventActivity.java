@@ -31,6 +31,7 @@ public class ViewEventActivity extends BaseActivity {
         mEditTextEventDate = (EditText) findViewById(R.id.editTextEventDate);
         mEditTextEventUsers = (EditText) findViewById(R.id.editTextEventUsers);
         mEditTextEventAudience = (EditText) findViewById(R.id.editTextEventAudience);
+        getUpdatedEventInfo();
     }
 
 
