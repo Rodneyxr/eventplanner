@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import cs3773.com.eventplanner.R;
 import cs3773.com.eventplanner.model.Event;
+import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
@@ -28,14 +29,15 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntHst;
     private EditText mEditTextEvntAduinc;
     //data
-    private String EvntNm;
-    private String EvntDesrptn;
-    private String EvntLctn;
-    private String EvntTim;
-    private String EvntDt;
-    private String EvntTm;
+    private String eventName;
+    private String eventDescription;
+    private String eventLocation;
+    private String eventTime;
+    private String eventDate;
+    private String eventAccountList;
     private String EvntHst;
-    private String EvntAduinc;
+    private String eventAudience;
+    private Date date;
     //event
     private CreateEventTask mCreateEventTask;
 
@@ -67,39 +69,39 @@ public class CreateEventActivity extends BaseActivity {
     }
 
     public void getNewEvntInfo() {
-        EvntNm = mEditTextEvntNm.getText().toString();
-        EvntDesrptn = mEditTextEvntDesrptn.getText().toString();
-        EvntLctn = mEditTextEvntLctn.getText().toString();
-        EvntTim = mEditTextEvntTim.getText().toString();
-        EvntDt = mEditTextEvntDt.getText().toString();
+        eventName = mEditTextEvntNm.getText().toString();
+        eventDescription = mEditTextEvntDesrptn.getText().toString();
+        eventLocation = mEditTextEvntLctn.getText().toString();
+        eventTime = mEditTextEvntTim.getText().toString();
+        eventDate = mEditTextEvntDt.getText().toString();
         EvntHst = mEditTextEvntHst.getText().toString();
-        EvntAduinc = mEditTextEvntAduinc.getText().toString();
-        EvntTm = mEditTextEvntTm.getText().toString();
+        eventAudience = mEditTextEvntAduinc.getText().toString();
+        eventAccountList = mEditTextEvntTm.getText().toString();
     }
 
     public void createTeam() {
-        if (EvntNm.isEmpty()) {
+        if (eventName.isEmpty()) {
             errorDialog("Event name cannot be empty.");
             mEditTextEvntNm.requestFocus();
             return;
         }
-        if (EvntDesrptn.isEmpty()) {
+        if (eventDescription.isEmpty()) {
             errorDialog("Event Description cannot be empty.");
             mEditTextEvntDesrptn.requestFocus();
             return;
         }
-        if (EvntLctn.isEmpty()) {
+        if (eventLocation.isEmpty()) {
             errorDialog("Event Location cannot be empty.");
             mEditTextEvntLctn.requestFocus();
             return;
         }
-        if (EvntTim.isEmpty()) {
+        if (eventTime.isEmpty()) {
             errorDialog("Event time  cannot be empty.");
             mEditTextEvntTim.requestFocus();
             return;
         }
 
-        if (EvntDt.isEmpty()) {
+        if (eventDate.isEmpty()) {
             errorDialog("Event Date cannot be empty.");
             mEditTextEvntDt.requestFocus();
             return;
@@ -107,9 +109,8 @@ public class CreateEventActivity extends BaseActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         // set the date
-        Date date;
         try {
-            date = sdf.parse(EvntDt);
+            date = sdf.parse(eventDate);
         } catch (ParseException pe) {
             errorDialog("Event Date should be in the format: 'yyyy-MM-dd'");
             return;
@@ -121,20 +122,20 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
 
-        if (EvntAduinc.isEmpty()) {
+        if (eventAudience.isEmpty()) {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
             return;
         }
 
-        if (EvntTm.isEmpty()) {
+        if (eventAccountList.isEmpty()) {
             errorDialog("Event team[s] cannot be empty.");
             mEditTextEvntTm.requestFocus();
             return;
         }
 
         mCreateEventTask = new CreateEventTask();
-        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc);
+        mCreateEventTask.execute(eventName, eventDescription, eventLocation, eventTime, eventDate, eventAccountList, EvntHst, eventAudience);
 
     }
 
@@ -148,14 +149,14 @@ public class CreateEventActivity extends BaseActivity {
         protected String doInBackground(String... params) {
             ServerRequest request = new ServerRequest(ServerLink.CREATE_EVENT);
 
-            request.put("event_name", EvntNm);
-            request.put("date", EvntDt);
-            request.put("time", EvntTim);
-            request.put("location", EvntLctn);
-            request.put("description", EvntDesrptn);
-            request.put("target_audience", EvntAduinc);
+            request.put("event_name", eventName);
+            request.put("date", eventDate);
+            request.put("time", eventTime);
+            request.put("location", eventLocation);
+            request.put("description", eventDescription);
+            request.put("target_audience", eventAudience);
 //            request.put("event_host", EvntHst);
-            request.put("team_list", EvntTm);
+            request.put("team_list", eventAccountList);
 
             try {
                 request.send();
@@ -175,7 +176,17 @@ public class CreateEventActivity extends BaseActivity {
 
 
             if (result.equals("")) {
-                Event createdEvent = new Event();
+                Event event = new Event();
+                event.setEventName(eventName);
+                event.setDate(date);
+                event.setTime(eventTime);
+                event.setLocation(eventLocation);
+                event.setTargetAudience(eventAudience);
+                event.setDescription(eventDescription);
+//                event.setAccountList(eventAccountList); // TODO: enable this
+
+                // add this event to the local session
+                Session.getEvents().add(event);
 
                 showDialog("Created Event", "Your event has been created!");
                 mEditTextEvntNm.setText("");
