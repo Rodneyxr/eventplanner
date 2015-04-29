@@ -1,23 +1,32 @@
 package cs3773.com.eventplanner.activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.content.Context;
-import android.content.Intent;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
+
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.model.Event;
+import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 
 
-public class CreateEventActivity extends BaseActivity  {
+public class CreateEventActivity extends BaseActivity {
 
     //components
     private EditText mEditTextEvntNm;
@@ -31,15 +40,18 @@ public class CreateEventActivity extends BaseActivity  {
     public Button button;
 
     //data
-    private String EvntNm;
-    private String EvntDesrptn;
-    private String EvntLctn;
-    private String EvntTim;
-    private String EvntDt;
-    private String EvntTm;
-    private String EvntAduinc;
+    private String eventName;
+    private String eventDescription;
+    private String eventLocation;
+    private String eventTime;
+    private String eventDate;
+    private String eventAccountList;
+    private String eventAudience;
+    private Date date;
+
     //event
     private CreateEventTask mCreateEventTask;
+    private ArrayList<String> accountList = new ArrayList<String>();
 
     //app
     @Override
@@ -62,7 +74,7 @@ public class CreateEventActivity extends BaseActivity  {
         Button button = (Button) findViewById(R.id.buttonPrompt);
 
 
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // get prompts.xml view
@@ -84,7 +96,7 @@ public class CreateEventActivity extends BaseActivity  {
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it
                                         // edit text
                                         String Description = userInput2.getText().toString();
@@ -97,7 +109,7 @@ public class CreateEventActivity extends BaseActivity  {
                                 })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
                                     }
                                 });
@@ -124,57 +136,65 @@ public class CreateEventActivity extends BaseActivity  {
     }
 
 
-
     public void getNewEvntInfo() {
-        EvntNm = mEditTextEvntNm.getText().toString();
-        EvntDesrptn = mEditTextEvntDesrptn.getText().toString();
-        EvntLctn = mEditTextEvntLctn.getText().toString();
-        EvntTim = mEditTextEvntTim.getText().toString();
-        EvntDt = mEditTextEvntDt.getText().toString();
-        EvntAduinc = mEditTextEvntAduinc.getText().toString();
-        EvntTm = mEditTextEvntTm.getText().toString();
+        eventName = mEditTextEvntNm.getText().toString();
+        eventDescription = mEditTextEvntDesrptn.getText().toString();
+        eventLocation = mEditTextEvntLctn.getText().toString();
+        eventTime = mEditTextEvntTim.getText().toString();
+        eventDate = mEditTextEvntDt.getText().toString();
+        eventAudience = mEditTextEvntAduinc.getText().toString();
+        eventAccountList = mEditTextEvntTm.getText().toString();
     }
 
-        public void createTeam() {
-        if (EvntNm.isEmpty()) {
+    public void createTeam() {
+        if (eventName.isEmpty()) {
             errorDialog("Event name cannot be empty.");
             mEditTextEvntNm.requestFocus();
             return;
         }
-        if (EvntDesrptn.isEmpty()) {
+        if (eventDescription.isEmpty()) {
             errorDialog("Event Description cannot be empty.");
             mEditTextEvntDesrptn.requestFocus();
             return;
         }
-        if (EvntLctn.isEmpty()) {
+        if (eventLocation.isEmpty()) {
             errorDialog("Event Location cannot be empty.");
             mEditTextEvntLctn.requestFocus();
             return;
         }
-        if (EvntTim.isEmpty()) {
+        if (eventTime.isEmpty()) {
             errorDialog("Event time  cannot be empty.");
             mEditTextEvntTim.requestFocus();
             return;
         }
-        if (EvntDt.isEmpty()) {
-
+        if (eventDate.isEmpty()) {
             errorDialog("Event Date cannot be empty.");
             mEditTextEvntDt.requestFocus();
             return;
         }
-        if (EvntAduinc.isEmpty()) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        // set the date
+        try {
+            date = sdf.parse(eventDate);
+        } catch (ParseException pe) {
+            errorDialog("Event Date should be in the format: 'yyyy-MM-dd'");
+            return;
+        }
+
+        if (eventAudience.isEmpty()) {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
             return;
         }
-        if (EvntTm.isEmpty()) {
+        if (eventAccountList.isEmpty()) {
             errorDialog("Event team[s] cannot be empty.");
             mEditTextEvntTm.requestFocus();
             return;
         }
 
         mCreateEventTask = new CreateEventTask();
-        mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntAduinc);
+        mCreateEventTask.execute(eventName, eventDescription, eventLocation, eventTime, eventDate, eventAccountList, eventAudience);
 
     }
 
@@ -188,14 +208,13 @@ public class CreateEventActivity extends BaseActivity  {
         protected String doInBackground(String... params) {
             ServerRequest request = new ServerRequest(ServerLink.CREATE_EVENT);
 
-            request.put("event_name", EvntNm);
-            request.put("date", EvntDt);
-            request.put("time", EvntTim);
-            request.put("location", EvntLctn);
-            request.put("description", EvntDesrptn);
-            request.put("target_audience", EvntAduinc);
-//            request.put("event_host", EvntHst);
-            request.put("team_list", EvntTm);
+            request.put("event_name", eventName);
+            request.put("date", eventDate);
+            request.put("time", eventTime);
+            request.put("location", eventLocation);
+            request.put("description", eventDescription);
+            request.put("target_audience", eventAudience);
+            request.put("team_list", eventAccountList);
 
             try {
                 request.send();
@@ -205,7 +224,6 @@ public class CreateEventActivity extends BaseActivity  {
             }
 
             String result = request.getResponse();
-            System.out.println("** result: " + result);
 
             return result;
         }
@@ -215,6 +233,20 @@ public class CreateEventActivity extends BaseActivity  {
             mCreateEventTask = null;
 
             if (result.equals("")) {
+                Event event = new Event();
+                event.setEventName(eventName);
+                event.setDate(date);
+                event.setTime(eventTime);
+                event.setLocation(eventLocation);
+                event.setTargetAudience(eventAudience);
+                event.setDescription(eventDescription);
+                accountList = new ArrayList<String>(Arrays.asList(eventAccountList.split("\\s*,\\s*")));
+                // TODO: verify that these users exist
+                event.setAccountList(accountList);
+
+                // add this event to the local session
+                Session.getEvents().add(event);
+
                 showDialog("Created Event", "Your event has been created!");
                 mEditTextEvntNm.setText("");
                 mEditTextEvntDt.setText("");
