@@ -172,14 +172,46 @@
             android:layout_below="@+id/textViewEvntTm"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/txtTime">
+                <requestFocus></requestFocus>
+            </EditText>
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnTimePicker"
+                android:text="Time Picker"
+                android:layout_below="@+id/editTextEvntTm"
+                android:layout_alignParentBottom="true" />
+            <Button
+                android:id="@+id/buttonPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule Description"
+                android:layout_below="@+id/editTextEvntTm"
+                android:layout_toRightOf="@+id/textViewEvntTim"
+                android:layout_toLeftOf="@+id/buttonCreateEventInfo"
+                android:layout_toStartOf="@+id/buttonCreateEventInfo" />
+
+            <EditText
+                android:id="@+id/editTextResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+            </EditText>
 
          <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Create"
                 android:id="@+id/buttonCreateEventInfo"
-                android:layout_below="@+id/editTextEvntTm"
-                android:layout_centerHorizontal="true" />
+             android:layout_below="@+id/editTextEvntTm"
+             android:layout_alignRight="@+id/editTextEvntTm"
+             android:layout_alignEnd="@+id/editTextEvntTm"
+             android:layout_alignParentBottom="true" />
 
 
         </RelativeLayout>
