@@ -9,8 +9,10 @@ import android.widget.EditText;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.model.Event;
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
 import cs3773.com.eventplanner.server.ServerRequestException;
@@ -103,7 +105,7 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         // set the date
         Date date;
         try {
@@ -113,34 +115,25 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
 
-        if (EvntHst.isEmpty())
-
-        {
+        if (EvntHst.isEmpty()) {
             errorDialog("Event host cannot be empty.");
             mEditTextEvntHst.requestFocus();
             return;
         }
 
-        if (EvntAduinc.isEmpty())
-
-        {
+        if (EvntAduinc.isEmpty()) {
             errorDialog("Event audience cannot be empty.");
             mEditTextEvntAduinc.requestFocus();
             return;
         }
 
-        if (EvntTm.isEmpty())
-
-        {
+        if (EvntTm.isEmpty()) {
             errorDialog("Event team[s] cannot be empty.");
             mEditTextEvntTm.requestFocus();
             return;
         }
 
-        mCreateEventTask = new
-
-                CreateEventTask();
-
+        mCreateEventTask = new CreateEventTask();
         mCreateEventTask.execute(EvntNm, EvntDesrptn, EvntLctn, EvntTim, EvntDt, EvntTm, EvntHst, EvntAduinc);
 
     }
@@ -172,7 +165,6 @@ public class CreateEventActivity extends BaseActivity {
             }
 
             String result = request.getResponse();
-            System.out.println("** result: " + result);
 
             return result;
         }
@@ -181,7 +173,10 @@ public class CreateEventActivity extends BaseActivity {
         protected void onPostExecute(final String result) {
             mCreateEventTask = null;
 
+
             if (result.equals("")) {
+                Event createdEvent = new Event();
+
                 showDialog("Created Event", "Your event has been created!");
                 mEditTextEvntNm.setText("");
                 mEditTextEvntDt.setText("");
@@ -193,7 +188,6 @@ public class CreateEventActivity extends BaseActivity {
 
                 mEditTextEvntHst.setText("");
                 mEditTextEvntNm.requestFocus();
-
             }
             //not sure what key is and if it is even needed.
             else if (result.contains("Duplicate entry") && result.contains("for key 'event'")) {

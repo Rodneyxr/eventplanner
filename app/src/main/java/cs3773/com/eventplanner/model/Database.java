@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import cs3773.com.eventplanner.server.ServerLink;
 import cs3773.com.eventplanner.server.ServerRequest;
@@ -33,10 +34,8 @@ public class Database {
                 return null;
             }
 
-//            System.out.println(result);
-
             // parse the result
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             JSONArray pages = new JSONArray(result);
             for (int i = 0; i < pages.length(); i++) {
                 JSONObject page = pages.getJSONObject(i);
@@ -50,14 +49,14 @@ public class Database {
                     date = sdf.parse(dateString);
                 } catch (ParseException pe) {
                     pe.printStackTrace();
-                    continue;
+                    continue; // skip this event (it is invalid or something went wrong)
                 }
                 event.setDate(date);
 
                 event.setTime(page.getString("time"));
                 event.setLocation(page.getString("location"));
                 event.setDescription(page.getString("description"));
-//                event.setAccountList();
+//                event.setAccountList(); // TODO: set account list
                 eventsList.add(event);
             }
 

@@ -18,7 +18,6 @@ import cs3773.com.eventplanner.server.ServerRequestException;
 public class Session {
 
     private static Account account;
-    private static Event event;
     private static ArrayList<Event> events;
 
     /**
@@ -66,11 +65,11 @@ public class Session {
         return account;
     }
 
-    public static void setEvents(){
+    public static void setEvents() {
         events = Database.getEvents();
     }
 
-    public static ArrayList<Event> getEvents(){
+    public static ArrayList<Event> getEvents() {
         return events;
     }
 }

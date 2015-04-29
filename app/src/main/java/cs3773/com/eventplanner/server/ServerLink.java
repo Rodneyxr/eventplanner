@@ -71,11 +71,19 @@ public enum ServerLink {
     GET_EVENTS("https://rodneyxr.com/ep/ep_get_events.php"),
 
     /**
+     * Deletes an event given the event_name
+     * <p/>
+     * $event_name
+     */
+    DELETE_EVENT("https://rodneyxr.com/ep/ep_delete_event.php"),
+
+    /**
      * Deletes a team given the team_name
      * <p/>
      * $team_name
      */
     DELETE_TEAM("https://rodneyxr.com/ep/ep_delete_team.php");
+
 
     String url;
 
