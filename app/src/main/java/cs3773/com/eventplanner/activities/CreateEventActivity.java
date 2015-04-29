@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import cs3773.com.eventplanner.R;
+import cs3773.com.eventplanner.controller.Tools;
 import cs3773.com.eventplanner.model.Event;
 import cs3773.com.eventplanner.model.Session;
 import cs3773.com.eventplanner.server.ServerLink;
@@ -37,7 +38,7 @@ public class CreateEventActivity extends BaseActivity {
     private EditText mEditTextEvntTm;
     private EditText mEditTextEvntAduinc;
     final Context context = this;
-    public Button button;
+    //public Button button;
 
     //data
     private String eventName;
@@ -52,6 +53,7 @@ public class CreateEventActivity extends BaseActivity {
     //event
     private CreateEventTask mCreateEventTask;
     private ArrayList<String> accountList = new ArrayList<String>();
+    Session session = new Session();
 
     //app
     @Override
@@ -60,7 +62,7 @@ public class CreateEventActivity extends BaseActivity {
         setContentView(R.layout.activity_create_event);
 
         // components from xml
-        button = (Button) findViewById(R.id.buttonPrompt);
+       // button = (Button) findViewById(R.id.buttonPrompt);
 
 
         mEditTextEvntNm = (EditText) findViewById(R.id.editTextEvntNm);
@@ -71,10 +73,10 @@ public class CreateEventActivity extends BaseActivity {
         mEditTextEvntDt = (EditText) findViewById(R.id.editTextEvntDt);
         mEditTextEvntAduinc = (EditText) findViewById(R.id.editTextEvntAduinc);
         mEditTextEvntTm = (EditText) findViewById(R.id.editTextEvntTm);
-        Button button = (Button) findViewById(R.id.buttonPrompt);
+        //Button button = (Button) findViewById(R.id.buttonPrompt);
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // get prompts.xml view
@@ -122,7 +124,7 @@ public class CreateEventActivity extends BaseActivity {
 
             }
 
-        });
+        }); */
 
         Button mCreateEventButton = (Button) findViewById(R.id.buttonCreateEventInfo);
         mCreateEventButton.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +146,8 @@ public class CreateEventActivity extends BaseActivity {
         eventDate = mEditTextEvntDt.getText().toString();
         eventAudience = mEditTextEvntAduinc.getText().toString();
         eventAccountList = mEditTextEvntTm.getText().toString();
+
+
     }
 
     public void createTeam() {
@@ -193,6 +197,14 @@ public class CreateEventActivity extends BaseActivity {
             return;
         }
 
+        accountList = new ArrayList<String>(Arrays.asList(eventAccountList.split("\\s*,\\s*")));
+        for(String account : accountList){
+            if(!Session.getAccountNames().contains(account)){
+                errorDialog("User: " + account + " doesn't exist!");
+                return;
+            }
+        }
+
         mCreateEventTask = new CreateEventTask();
         mCreateEventTask.execute(eventName, eventDescription, eventLocation, eventTime, eventDate, eventAccountList, eventAudience);
 
@@ -214,7 +226,7 @@ public class CreateEventActivity extends BaseActivity {
             request.put("location", eventLocation);
             request.put("description", eventDescription);
             request.put("target_audience", eventAudience);
-            request.put("team_list", eventAccountList);
+            request.put("team_list", Tools.blobify(accountList));
 
             try {
                 request.send();
@@ -240,8 +252,6 @@ public class CreateEventActivity extends BaseActivity {
                 event.setLocation(eventLocation);
                 event.setTargetAudience(eventAudience);
                 event.setDescription(eventDescription);
-                accountList = new ArrayList<String>(Arrays.asList(eventAccountList.split("\\s*,\\s*")));
-                // TODO: verify that these users exist
                 event.setAccountList(accountList);
 
                 // add this event to the local session
