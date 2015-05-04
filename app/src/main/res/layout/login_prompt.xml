@@ -1,0 +1,44 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_alignParentLeft="true"
+    android:background="@color/actionbar"
+    android:layout_alignParentStart="true"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/logo" />
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="1dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Welcome To Centrium Events!"
+        android:gravity="center"
+        android:id="@+id/textViewWelcome" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="1dp"
+        android:background="@color/bg_btn_join"/>
+    <TextView
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="To get started 'tap' the navigation drawer on the top left, or slide from left to right to view menu."
+        android:id="@+id/textViewWelcomeBody"
+        android:layout_weight="0.02" />
+
+    <!-- Login progress -->
+
+</LinearLayout>

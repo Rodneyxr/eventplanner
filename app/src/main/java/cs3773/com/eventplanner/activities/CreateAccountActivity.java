@@ -33,6 +33,7 @@ public class CreateAccountActivity extends BaseActivity {
     private String validatePassword;
     private String spinnerSelection;
 
+
     private CreateAccountTask mCreateAccountTask;
 
     @Override

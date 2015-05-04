@@ -7,9 +7,15 @@
     <!-- Test -->
     <!-- Test -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:background="@color/actionbar"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
 
         <include layout="@layout/toolbar_actionbar_with_headerbar" />
 
@@ -17,186 +23,227 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@color/actionbar"
+                android:weightSum="1">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            tools:context="cs3773.com.eventplanner.activities.CreateTeamActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Create Event"
-            android:id="@+id/textViewCreateEvent"
-            android:textSize="30sp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Name"
-            android:id="@+id/textViewEvntNm"
-            android:layout_below="@+id/textViewCreateEvent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+
+        <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/logo" />
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Name"-->
+            <!--android:id="@+id/textViewEvntNm"-->
+            <!--android:layout_below="@+id/textViewCreateEvent"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:padding="10dp"
             android:inputType="text"
+            android:hint="Event Name"
+            android:background="@color/white"
             android:ems="10"
             android:id="@+id/editTextEvntNm"
-            android:layout_below="@+id/textViewEvntNm"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Description"
-            android:id="@+id/textViewEvntDesrptn"
-            android:layout_below="@+id/editTextEvntNm"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Description"-->
+            <!--android:id="@+id/textViewEvntDesrptn"-->
+            <!--android:layout_below="@+id/editTextEvntNm"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:padding="10dp"
             android:inputType="text"
+            android:hint="Event Description"
+            android:background="@color/white"
             android:ems="10"
             android:id="@+id/editTextEvntDesrptn"
-            android:layout_below="@+id/textViewEvntDesrptn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Location"
-            android:id="@+id/textViewEvntLctn"
-            android:layout_below="@+id/editTextEvntDesrptn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Location"-->
+            <!--android:id="@+id/textViewEvntLctn"-->
+            <!--android:layout_below="@+id/editTextEvntDesrptn"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:hint="Event Location"
+            android:padding="10dp"
             android:ems="10"
+            android:background="@color/white"
+            android:inputType="text"
             android:id="@+id/editTextEvntLctn"
-            android:layout_below="@+id/textViewEvntLctn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Date"
-            android:id="@+id/textViewEvntDt"
-            android:layout_below="@+id/editTextEvntLctn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+             />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Date"-->
+            <!--android:id="@+id/textViewEvntDt"-->
+            <!--android:layout_below="@+id/editTextEvntLctn"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:hint="Event Date"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:id="@+id/editTextEvntDt"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/editTextEvntDt"
-            android:layout_below="@+id/textViewEvntDt"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Time"
-            android:id="@+id/textViewEvntTim"
-            android:layout_below="@+id/editTextEvntDt"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Time"-->
+            <!--android:id="@+id/textViewEvntTim"-->
+            <!--android:layout_below="@+id/editTextEvntDt"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:padding="10dp"
+            android:hint="Event Time"
+            android:ems="10"
+            android:background="@color/white"
             android:inputType="time"
-            android:ems="10"
             android:id="@+id/editTextEvntTim"
-            android:layout_below="@+id/textViewEvntTim"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            />
 
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Audience"
-            android:id="@+id/textViewEvntAduinc"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editTextEvntTim" />
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Audience"-->
+            <!--android:id="@+id/textViewEvntAduinc"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/editTextEvntTim" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:hint="Event Audience"
+            android:inputType="textPersonName"
+            android:padding="10dp"
             android:ems="10"
+            android:background="@color/white"
             android:id="@+id/editTextEvntAduinc"
-            android:layout_below="@+id/textViewEvntAduinc"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Event Team[s]"
-            android:id="@+id/textViewEvntTm"
-            android:layout_below="@+id/editTextEvntAduinc"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+             />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="Event Team[s]"-->
+            <!--android:id="@+id/textViewEvntTm"-->
+            <!--android:layout_below="@+id/editTextEvntAduinc"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:hint="Event Team[s]"
             android:ems="10"
+            android:background="@color/white"
             android:id="@+id/editTextEvntTm"
-            android:layout_below="@+id/textViewEvntTm"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            ></EditText>
+            <!--/>-->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                >
 
            <Button
                 android:id="@+id/buttonPrompt"
-                android:layout_width="wrap_content"
+                android:layout_width="145dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/bg_btn_join"
+                android:padding="2dp"
+                android:textColor="@color/white"
                 android:text="Add Schedule"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextEvntTm"
-                android:layout_alignRight="@+id/textViewEvntDesrptn"
-                android:layout_alignEnd="@+id/textViewEvntDesrptn" />
-
+                />
+                <Button
+                    android:id="@+id/empty"
+                    android:layout_width="10dp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:padding="2dp"
+                    />
          <Button
-             android:layout_width="wrap_content"
+             android:layout_width="145dp"
              android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:layout_marginTop="10dp"
+             android:padding="10dp"
+             android:background="@color/bg_btn_join"
+             android:textColor="@color/white"
              android:text="Create"
              android:id="@+id/buttonCreateEventInfo"
-             android:layout_alignRight="@+id/editTextEvntTm"
-             android:layout_alignEnd="@+id/editTextEvntTm"
-             android:layout_alignParentBottom="true"
-             android:layout_below="@+id/editTextEvntTm" />
+            />
+
+            </LinearLayout>
+            </LinearLayout>
 
 
-        </RelativeLayout>
+
 
         </ScrollView>
 

@@ -10,12 +10,12 @@
     </style>
 
     <style name="ActionBarThemeOverlay" parent="">
-        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:textColorPrimary">#fcd486</item>
         <item name="colorControlHighlight">#3fff</item>
     </style>
 
     <style name="ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">#fcd486</item>
         <item name="android:textSize">18sp</item>
     </style>
 

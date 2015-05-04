@@ -1,145 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_root"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="@color/actionbar"
+    android:weightSum="1"
     android:orientation="vertical"
     android:padding="10dp" >
 
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Schedule : "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@color/actionbar"
+            android:weightSum="1"
+            android:orientation="vertical"
+            android:padding="10dp" >
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/logo" />
+    <!--<TextView-->
+        <!--android:id="@+id/textView1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Schedule : "-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+
 
     <EditText
         android:id="@+id/editTextDialogUserInput"
-        android:layout_width="match_parent"
-        android:hint="Time"
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:hint=" Time"
         android:inputType="time"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+        android:background="@color/white"
+
+        >
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput2"
-        android:hint="Task Description"
-        android:layout_width="match_parent"
+        android:hint=" Task Description"
         android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
+        android:layout_marginTop="2dp"
+        android:inputType="textPersonName"
+        android:background="@color/white"
+        android:layout_width="260dp"
+        android:layout_height="45dp" >
 
-        <requestFocus />
 
     </EditText>
     <EditText
         android:id="@+id/editTextDialogUserInput3"
-        android:layout_width="match_parent"
-        android:hint="Time"
-        android:imeOptions="actionNext"
+        android:layout_width="260dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:hint=" Time"
         android:inputType="time"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+         >
+
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput4"
-        android:hint="Task Description"
-        android:imeOptions="actionNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:hint=" Task Description"
+        android:inputType="textPersonName"
+        android:layout_marginTop="2dp"
+        android:layout_width="260dp"
+        android:background="@color/white"
+        android:layout_height="45dp" >
 
-        <requestFocus />
 
     </EditText>
     <EditText
         android:id="@+id/editTextDialogUserInput5"
-        android:layout_width="match_parent"
-        android:hint="Time"
-        android:imeOptions="actionNext"
-        android:inputType="time"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="2dp"
+        android:hint=" Time"
+        android:background="@color/white"
+        android:inputType="time" >
+
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput6"
-        android:hint="Task Description"
-        android:layout_width="match_parent"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
+        android:hint=" Task Description"
+        android:layout_marginTop="2dp"
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:inputType="textPersonName"
+         >
 
-        <requestFocus />
 
     </EditText>
     <EditText
         android:id="@+id/editTextDialogUserInput7"
-        android:layout_width="match_parent"
-        android:hint="Time"
+        android:hint=" Time"
+        android:layout_marginTop="2dp"
         android:inputType="time"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+        android:layout_width="260dp"
+        android:background="@color/white"
+        android:layout_height="45dp" >
+
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput8"
-        android:hint="Task Description"
-        android:imeOptions="actionNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:hint=" Task Description"
+        android:layout_marginTop="2dp"
+        android:inputType="textPersonName"
+        android:background="@color/white"
+        android:layout_width="260dp"
+        android:layout_height="45dp" >
 
-        <requestFocus />
 
     </EditText>
     <EditText
         android:id="@+id/editTextDialogUserInput9"
-        android:layout_width="match_parent"
-        android:imeOptions="actionNext"
-        android:hint="Time"
-        android:inputType="time"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+        android:layout_width="260dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="45dp"
+        android:hint=" Time"
+        android:background="@color/white"
+        android:inputType="time" >
+
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput10"
-        android:hint="Task Description"
-        android:layout_width="match_parent"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
+        android:hint=" Task Description"
+        android:layout_marginTop="2dp"
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:inputType="textPersonName" >
 
-        <requestFocus />
+
 
     </EditText>
     <EditText
         android:id="@+id/editTextDialogUserInput11"
-        android:layout_width="match_parent"
-        android:hint="Time"
-        android:inputType="time"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
-        <requestFocus />
+        android:layout_width="260dp"
+        android:layout_marginTop="2dp"
+        android:layout_height="45dp"
+        android:hint=" Time"
+        android:background="@color/white"
+        android:inputType="time" >
+
 
     </EditText>
 
     <EditText
         android:id="@+id/editTextDialogUserInput12"
-        android:hint="Task Description"
-        android:layout_width="match_parent"
-        android:imeOptions="actionNext"
-        android:layout_height="wrap_content" >
+        android:hint=" Task Description"
+        android:layout_marginTop="2dp"
+        android:layout_width="260dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:inputType="textPersonName" >
 
-        <requestFocus />
+
 
     </EditText>
 
+        </LinearLayout>
+
+
+
 
 </LinearLayout>
+    </ScrollView>

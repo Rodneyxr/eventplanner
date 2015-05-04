@@ -3,6 +3,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/actionbar"
     tools:context=".activities.ViewEventActivity">
 
     <LinearLayout
@@ -15,147 +16,175 @@
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@color/actionbar"
+                android:weightSum="1"
+                tools:context="cs3773.com.eventplanner.activities.ViewEventActivity">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            tools:context="cs3773.com.eventplanner.activities.ViewEventActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View Event"
-        android:id="@+id/textViewViewEvent"
-        android:textSize="30sp"
-        android:layout_centerHorizontal="true" />
+                <ImageView
+                    android:id="@+id/imgLogo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Name"
-        android:layout_below="@+id/textViewViewEvent"
-        android:id="@+id/textViewEditName" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="View Event"-->
+        <!--android:id="@+id/textViewViewEvent"-->
+        <!--android:textSize="30sp"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Name"-->
+        <!--android:layout_below="@+id/textViewViewEvent"-->
+        <!--android:id="@+id/textViewEditName" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:layout_below="@+id/textViewEditName"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventName" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Description"
-        android:layout_below="@+id/editTextEventName"
-        android:id="@+id/textViewEventDescription" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Description"-->
+        <!--android:layout_below="@+id/editTextEventName"-->
+        <!--android:id="@+id/textViewEventDescription" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventDescription"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventDescription" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Location"
-        android:layout_below="@+id/editTextEventDescription"
-        android:id="@+id/textViewEventLocation" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Location"-->
+        <!--android:layout_below="@+id/editTextEventDescription"-->
+        <!--android:id="@+id/textViewEventLocation" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventLocation"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventLocation" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Date"
-        android:layout_below="@+id/editTextEventLocation"
-        android:id="@+id/textViewEventDate" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Date"-->
+        <!--android:layout_below="@+id/editTextEventLocation"-->
+        <!--android:id="@+id/textViewEventDate" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventDate"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventDate" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Time"
-        android:layout_below="@+id/editTextEventDate"
-        android:id="@+id/textViewEventTime" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Time"-->
+        <!--android:layout_below="@+id/editTextEventDate"-->
+        <!--android:id="@+id/textViewEventTime" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventTime"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventTime" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Audience"
-        android:layout_below="@+id/editTextEventTime"
-        android:id="@+id/textViewEventAudience" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Audience"-->
+        <!--android:layout_below="@+id/editTextEventTime"-->
+        <!--android:id="@+id/textViewEventAudience" />-->
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventAudience"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventAudience" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Event Users"
-        android:layout_below="@+id/editTextEventAudience"
-        android:id="@+id/textViewEventUsers" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Event Users"-->
+        <!--android:id="@+id/textViewEventUsers" />-->
+
+
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:layout_below="@+id/textViewEventUsers"
+        android:padding="10dp"
+        android:background="@color/white"
         android:id="@+id/editTextEventUsers" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
+                android:layout_marginTop="2dp"
                 android:layout_height="wrap_content"
                 android:text="Delete Event"
+                android:background="@color/bg_btn_join"
+                android:textColor="@color/white"
                 android:layout_below="@+id/editTextEventUsers"
                 android:id="@+id/buttonDeleteEvent" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
         </ScrollView>

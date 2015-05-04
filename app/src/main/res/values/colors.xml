@@ -11,6 +11,20 @@
   limitations under the License.
   -->
 <resources>
+    <color name="actionbar">#e7e5cd</color>
+    <color name="body_background">#e8e8e8</color>
+    <color name="body_background_green">#82e783</color>
+    <color name="server_status_bar">#2b2b2b</color>
+    <color name="title_gray">#434343</color>
+    <color name="white">#ffffff</color>
+    <color name="bg_msg_you">#5eb964</color>
+    <color name="bg_msg_from">#e5e7eb</color>
+    <color name="msg_border_color">#a1a1a1</color>
+    <color name="bg_btn_join">#5cb8b8</color>
+    <color name="bg_msg_input">#e8e8e8</color>
+    <color name="text_msg_input">#626262</color>
+    <color name="lblFromName">#777777</color>
+
     <item name="grey" type="color">#555555</item>
     <item name="green" type="color">#4499CC00</item>
     <item name="darkgreen" type="color">#FF669900</item>
@@ -28,7 +42,7 @@
     <color name="theme_primary_dark">#303f9f</color>
     <color name="theme_primary_light">#7986cb</color>
 
-    <color name="theme_accent_1">#00b0ff</color>
+    <color name="theme_accent_1">#5cb8b8</color>
     <color name="theme_accent_1_light">#8ad4fa</color>
 
     <color name="theme_accent_2">#e91e63</color>
@@ -36,10 +50,10 @@
     <color name="all_track_color">#ff222222</color>
     <color name="home_pane_header">#99000000</color>
 
-    <color name="sliding_pane_content_fade">#cceeeeee</color>
+    <color name="sliding_pane_content_fade">#facd66</color>
     <color name="sticky_block_background">#ddffffff</color>
 
-    <color name="map_info_1">#ff000000</color>
+    <color name="map_info_1">#f9db3f</color>
     <color name="map_info_2">#ff777777</color>
     <color name="map_floorselect_active">#FF000000</color>
     <color name="map_floorselect_inactive">#FF333333</color>
@@ -47,9 +61,9 @@
     <color name="gray_background">#e5e5e5</color>
     <color name="dark_divider">#32000000</color>
 
-    <color name="navdrawer_background">#ffffffff</color>
+    <color name="navdrawer_background">#ece9d8</color>
     <color name="navdrawer_text_color">@color/body_text_1</color>
-    <color name="navdrawer_text_color_selected">@color/theme_primary</color>
+    <color name="navdrawer_text_color_selected">#ececda</color>
     <color name="navdrawer_icon_tint">#888</color>
     <color name="navdrawer_icon_tint_selected">@color/theme_primary</color>
 
@@ -62,7 +76,7 @@
     <color name="data_item_lightbg_body_text">#707070</color>
     <color name="data_item_lightbg_dim_text">#e0e0e0</color>
 
-    <color name="session_photo_scrim">#6000</color>
+    <color name="session_photo_scrim">#941d23</color>
 
     <color name="default_session_color">@color/theme_primary</color>
     <color name="no_track_branding_session_tile_overlay">#8333</color>
@@ -80,7 +94,21 @@
     <color name="translucent_statusbar_background">#cc3f51b5</color>
 
     <color name="tab_background">@color/theme_primary</color>
-    <color name="tab_selected_strip">@color/theme_accent_1</color>
+    <color name="tab_selected_strip">@color/session_photo_scrim</color>
 
     <color name="my_schedule_conflict">#db4437</color>
+    <color name="background_gradient_start">#000000</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="fastlane_background">#0096a6</color>
+    <color name="search_opaque">#ffaa3f</color>
+    <color name="detail_background">#0096a6</color>
+    <color name="soft_opaque">#30000000</color>
+    <color name="img_soft_opaque">#30FF0000</color>
+    <color name="img_full_opaque">#00000000</color>
+    <color name="black_opaque">#AA000000</color>
+    <color name="black">#59000000</color>
+    <color name="orange_transparent">#AAFADCA7</color>
+    <color name="orange">#FADCA7</color>
+    <color name="yellow">#EEFF41</color>
+    <color name="default_background">#3d3d3d</color>
 </resources>

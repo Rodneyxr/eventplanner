@@ -6,80 +6,106 @@
     tools:context=".activities.AccountInfoActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+
+        android:layout_alignParentLeft="true"
+        android:background="@color/actionbar"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
 
         <include layout="@layout/toolbar_actionbar_with_headerbar" />
 
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/account_personal_info"
-            android:id="@+id/textViewAccountPersonalInfo"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/accountNumber"
+            android:text="Account Number:"
             android:id="@+id/textViewAccountNumber" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/system_generated"
+            android:padding="10dp"
+            android:maxLines="1"
+            android:background="@color/white"
+            android:textColor="@color/session_photo_scrim"
             android:id="@+id/textViewAccountUUID" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/accountName"
+            android:text="Full Name:"
             android:id="@+id/textViewAccountName" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
+            android:padding="10dp"
+            android:background="@color/white"
             android:id="@+id/editTextAccountName" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/accountEmail"
+            android:text="Email:"
             android:id="@+id/textViewAccountEmail" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
+            android:padding="10dp"
+            android:background="@color/white"
             android:id="@+id/editTextAccountEmail" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/accountPhoneNumber"
+            android:text="Phone Number:"
             android:id="@+id/textViewAccountPhoneNumber" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
             android:ems="10"
+            android:padding="10dp"
+            android:background="@color/white"
             android:id="@+id/editTextAccountPhoneNumber" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/bg_btn_join"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:text="@string/updateAccount"
+            android:textColor="@color/white"
             android:id="@+id/buttonUpdateAccountInfo" />
 
     </LinearLayout>

@@ -3,11 +3,15 @@ package cs3773.com.eventplanner.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.WindowManager;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -38,20 +43,21 @@ public class LoginActivity extends BaseActivity {
     private UserLoginTask mAuthTask = null;
 
     //parse Login
-    private String userEmail;
     private EditText userName;
     private EditText password;
+
+    final Context context = this;
 
     // UI references.
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+            setContentView(R.layout.activity_login);
 
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -82,7 +88,6 @@ public class LoginActivity extends BaseActivity {
         userName = (AutoCompleteTextView) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
-        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
@@ -95,7 +100,7 @@ public class LoginActivity extends BaseActivity {
             public void done(ParseUser parseUser, ParseException e) {
                 if (e == null) {
 
-                    Toast.makeText(getApplicationContext(), "Login Successfully!"
+                    Toast.makeText(getApplicationContext(), "Parse Login Confirmed!"
                             , Toast.LENGTH_LONG).show();
 
                 } else {
@@ -106,12 +111,15 @@ public class LoginActivity extends BaseActivity {
                     //Add Parse USER
                     user.signUpInBackground(new SignUpCallback() {
                         @Override
+
                         public void done(ParseException e) {
                             if (e == null) {
                                 //we are good!
                                 Toast.makeText(getApplicationContext(), "Parse created user successfully", Toast.LENGTH_LONG).show();
+
+
                             } else {
-                                Toast.makeText(getApplicationContext(), "Parse User exists", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Parse User Error.", Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -201,14 +209,6 @@ public class LoginActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
 
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
@@ -222,7 +222,6 @@ public class LoginActivity extends BaseActivity {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

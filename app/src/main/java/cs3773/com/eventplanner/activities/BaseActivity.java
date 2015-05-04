@@ -67,10 +67,10 @@ public abstract class BaseActivity extends ActionBarActivity {
             R.drawable.ic_drawer_calendar,  // calendar
             R.drawable.ic_drawer_chat, // chat
             R.drawable.ic_drawer_account_info, // account info
-            R.drawable.ic_drawer, // create account
+            R.drawable.drawer_account_new, // create account
             R.drawable.ic_drawer, // create team
-            R.drawable.ic_drawer_event, // create event
-            R.drawable.ic_drawer, // logout
+            R.drawable.ic_action_calendar_add, // create event
+            R.drawable.ic_action_ic_drawer_logout, // logout
     };
 
     // delay to launch nav drawer item, to allow close animation to play

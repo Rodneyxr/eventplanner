@@ -8,14 +8,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ece9d8">
 
         <include layout="@layout/toolbar_actionbar_with_headerbar" />
 
         <CalendarView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/calendarView" />
+            android:id="@+id/calendarView"
+            android:showWeekNumber="false"
+            android:selectedWeekBackgroundColor="@null"
+            android:selectedDateVerticalBar="@color/bg_btn_join"
+            android:focusedMonthDateColor="@color/session_photo_scrim"
+            android:weekSeparatorLineColor="@color/data_item_lightbg_title"/>
     </LinearLayout>
 
     <!-- Nav drawer -->
